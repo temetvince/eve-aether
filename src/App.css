@@ -382,8 +382,9 @@ main {
   cursor: pointer;
 }
 .fleet-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1.5rem;
   overflow-y: auto;
   flex: 1;
@@ -401,6 +402,8 @@ main {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   position: relative;
+  min-height: 147px;
+  max-height: fit-content;
 }
 .fleet-card:hover {
   border-color: var(--secondary);
