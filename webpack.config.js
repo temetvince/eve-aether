@@ -1,7 +1,7 @@
  
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { resolve as _resolve, join, dirname } from 'path';
-// import CopyWebpackPlugin from 'copy-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -60,11 +60,11 @@ export default (env, argv) => {
     },
 
     plugins: [
-      // new CopyWebpackPlugin({
-      //   patterns: [
-      //     { from: join(__dirname, 'CNAME'), to: '.' },
-      //   ],
-      // }),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: join(__dirname, 'CNAME'), to: '.' },
+        ],
+      }),
       new HtmlWebpackPlugin({
         template: join(__dirname, 'public', 'index.html'),
         filename: 'index.html',
