@@ -144,6 +144,11 @@ const App: React.FC = () => {
     if (!currentRandom) return;
     setInUse((prev) => {
       const next = [...prev, { shipName: currentRandom, hull: '', tags: [] }];
+      setEditingIndex(next.length - 1);
+      setSelectedHull('');
+      setSelectedTags([]);
+      setHullSearch('');
+      setModal('edit');
       const available = getAvailable(shipNames, next);
       setCurrentRandom(chooseRandom(available));
       return next;
@@ -160,6 +165,11 @@ const App: React.FC = () => {
 
     setInUse((prev) => {
       const next = [...prev, { shipName: name, hull: '', tags: [] }];
+      setEditingIndex(next.length - 1);
+      setSelectedHull('');
+      setSelectedTags([]);
+      setHullSearch('');
+      setModal('edit');
       const available = getAvailable(shipNames, next);
       setCurrentRandom(chooseRandom(available));
       return next;
@@ -192,6 +202,7 @@ const App: React.FC = () => {
     setEditingIndex(index);
     setSelectedHull(item.hull || '');
     setSelectedTags(item.tags);
+    setHullSearch(item.hull || '');
     setModal('edit');
   };
 
