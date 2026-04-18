@@ -431,6 +431,8 @@ main {
   border-radius: 12px;
   width: 100%;
   max-width: 700px;
+  max-height: calc(100vh - 96px);
+  overflow: hidden;
   padding: 0;
   border: 1px solid var(--edge);
   display: flex;
@@ -455,8 +457,10 @@ main {
 }
 .modal-body {
   padding: 20px;
-  flex: 1;
-  overflow: auto;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 200px);
 }
 .form-group {
   margin-bottom: 16px;
@@ -739,5 +743,13 @@ html {
   }
   .random-name {
     font-size: 2.4rem;
+  }
+  .modal-content {
+    max-width: calc(100% - 32px);
+    max-height: calc(100vh - 48px);
+    border-radius: 10px;
+  }
+  .modal-body {
+    max-height: calc(100vh - 140px);
   }
 }
