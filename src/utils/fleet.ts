@@ -1,4 +1,5 @@
 import { FleetItem, Hull } from '../types';
+import { eqCI, ci } from './strings';
 
 export const makeAetherFilename = (baseName: string) => {
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
@@ -6,7 +7,7 @@ export const makeAetherFilename = (baseName: string) => {
 };
 
 export const getAvailable = (shipNames: string[], inUse: FleetItem[]) =>
-  shipNames.filter((n) => !inUse.some((i) => i.shipName === n));
+  shipNames.filter((n) => !inUse.some((i) => eqCI(i.shipName, n)));
 
 export const chooseRandom = (available: string[]) =>
   available.length ?
@@ -14,10 +15,43 @@ export const chooseRandom = (available: string[]) =>
   : null;
 
 export const filteredHulls = (allHulls: Hull[], query: string) =>
-  allHulls.filter((h) => h.Ship.toLowerCase().includes(query.toLowerCase()));
+  allHulls.filter((h) => ci(h.Ship).includes(ci(query)));
 
 export const exportFleetData = (shipNames: string[], inUse: FleetItem[]) => {
-  const data = { version: '4.0-aether', shipNames, fleet: inUse };
+  // Normalize, dedupe and sort shipNames (case-insensitive)
+  const seenNames = new Map<string, string>();
+  for (const n of shipNames) {
+    const trimmed = n.trim();
+    const key = trimmed.toLowerCase();
+    if (trimmed && !seenNames.has(key)) seenNames.set(key, trimmed);
+  }
+  const sortedShipNames = Array.from(seenNames.values()).sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: 'base' }),
+  );
+
+  // Ensure tags are normalized, deduped, and exported in alphabetical order for consistency
+  const normalizeTags = (tags: string[]) => {
+    const seen = new Map<string, string>();
+    for (const t of tags) {
+      const trimmed = t.trim();
+      const key = trimmed.toLowerCase();
+      if (trimmed && !seen.has(key)) seen.set(key, trimmed);
+    }
+    return Array.from(seen.values()).sort((a, b) =>
+      a.localeCompare(b, undefined, { sensitivity: 'base' }),
+    );
+  };
+
+  const sortedFleet = inUse.map((it) => ({
+    ...it,
+    tags: normalizeTags(it.tags),
+  }));
+
+  const data = {
+    version: '4.0-aether',
+    shipNames: sortedShipNames,
+    fleet: sortedFleet,
+  };
   const blob = new Blob([JSON.stringify(data, null, 2)], {
     type: 'application/json',
   });

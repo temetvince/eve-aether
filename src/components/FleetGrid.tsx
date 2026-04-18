@@ -44,14 +44,18 @@ const FleetGrid: React.FC<Props> = ({ inUse, openEdit, destroyShip }) => (
 
           {item.tags.length > 0 && (
             <div className='tag-pills'>
-              {item.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className='tag-pill'
-                >
-                  {tag}
-                </span>
-              ))}
+              {[...item.tags]
+                .sort((a, b) =>
+                  a.localeCompare(b, undefined, { sensitivity: 'base' }),
+                )
+                .map((tag) => (
+                  <span
+                    key={tag}
+                    className='tag-pill'
+                  >
+                    {tag}
+                  </span>
+                ))}
             </div>
           )}
 

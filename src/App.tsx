@@ -12,6 +12,14 @@ import defaultNames from './data/names';
 import { allHulls } from './data/hulls';
 import { tagCategories } from './data/tags';
 import { getAvailable, chooseRandom, exportFleetData } from './utils/fleet';
+import {
+  eqCI,
+  includesCI,
+  sortStringsCI,
+  uniqueSortStringsCI,
+  indexOfCI,
+  ci,
+} from './utils/strings';
 import { FleetItem, Hull, TagCategory } from './types';
 import HullRegistry from './components/HullRegistry';
 import TagRegistry from './components/TagRegistry';
@@ -26,13 +34,13 @@ const App: React.FC = () => {
           Array.isArray(parsed) &&
           parsed.every((p) => typeof p === 'string')
         ) {
-          return parsed.sort((a, b) => a.localeCompare(b));
+          return sortStringsCI(parsed);
         }
       }
     } catch {
-      // fallthrough to defaults
+      // ignore parse errors
     }
-    return [...defaultNames].sort((a, b) => a.localeCompare(b));
+    return sortStringsCI([...defaultNames]);
   });
 
   const [inUse, setInUse] = useState<FleetItem[]>(() => {
@@ -61,7 +69,11 @@ const App: React.FC = () => {
               }
               return { shipName: '', hull: '', tags: [] } as FleetItem;
             })
-            .sort((a, b) => a.shipName.localeCompare(b.shipName));
+            .sort((a, b) =>
+              a.shipName.localeCompare(b.shipName, undefined, {
+                sensitivity: 'base',
+              }),
+            );
         }
       }
     } catch {
@@ -102,18 +114,26 @@ const App: React.FC = () => {
           return parsedTags
             .map((c) => ({
               category: c.category,
-              tags: [...c.tags].sort((x, y) => x.localeCompare(y)),
+              tags: sortStringsCI([...c.tags]),
             }))
-            .sort((a, b) => a.category.localeCompare(b.category));
+            .sort((a, b) =>
+              a.category.localeCompare(b.category, undefined, {
+                sensitivity: 'base',
+              }),
+            );
         }
       }
     } catch {}
     return tagCategories
       .map((c) => ({
         category: c.category,
-        tags: [...c.tags].sort((x, y) => x.localeCompare(y)),
+        tags: sortStringsCI([...c.tags]),
       }))
-      .sort((a, b) => a.category.localeCompare(b.category));
+      .sort((a, b) =>
+        a.category.localeCompare(b.category, undefined, {
+          sensitivity: 'base',
+        }),
+      );
   });
 
   // Save to localStorage
@@ -146,8 +166,15 @@ const App: React.FC = () => {
     if (!currentRandom) return;
     setInUse((prev) => {
       const next = [...prev, { shipName: currentRandom, hull: '', tags: [] }];
-      const sorted = next.sort((a, b) => a.shipName.localeCompare(b.shipName));
-      const newIndex = sorted.findIndex((s) => s.shipName === currentRandom);
+      const sorted = next.sort((a, b) =>
+        a.shipName.localeCompare(b.shipName, undefined, {
+          sensitivity: 'base',
+        }),
+      );
+      const newIndex = indexOfCI(
+        sorted.map((s) => s.shipName),
+        currentRandom,
+      );
       setEditingIndex(newIndex);
       setSelectedHull('');
       setSelectedTags([]);
@@ -162,15 +189,22 @@ const App: React.FC = () => {
   const deployNamed = (name: string) => {
     // ensure name is in registry, then deploy
     setShipNames((prev) => {
-      if (prev.includes(name)) return prev;
-      const next = [...prev, name].sort((a, b) => a.localeCompare(b));
+      if (includesCI(prev, name)) return prev;
+      const next = uniqueSortStringsCI([...prev, name]);
       return next;
     });
 
     setInUse((prev) => {
       const next = [...prev, { shipName: name, hull: '', tags: [] }];
-      const sorted = next.sort((a, b) => a.shipName.localeCompare(b.shipName));
-      const newIndex = sorted.findIndex((s) => s.shipName === name);
+      const sorted = next.sort((a, b) =>
+        a.shipName.localeCompare(b.shipName, undefined, {
+          sensitivity: 'base',
+        }),
+      );
+      const newIndex = indexOfCI(
+        sorted.map((s) => s.shipName),
+        name,
+      );
       setEditingIndex(newIndex);
       setSelectedHull('');
       setSelectedTags([]);
@@ -190,17 +224,17 @@ const App: React.FC = () => {
     setInUse((prev) =>
       prev
         .filter((_, i) => i !== index)
-        .sort((a, b) => a.shipName.localeCompare(b.shipName)),
+        .sort((a, b) =>
+          a.shipName.localeCompare(b.shipName, undefined, {
+            sensitivity: 'base',
+          }),
+        ),
     );
   };
 
   const importNames = (names: string[]) => {
     // merge unique names and sort
-    setShipNames((prev) => {
-      const set = new Set(prev);
-      names.forEach((n) => set.add(n));
-      return Array.from(set).sort((a, b) => a.localeCompare(b));
-    });
+    setShipNames((prev) => uniqueSortStringsCI([...prev, ...names]));
   };
 
   const clearAllNames = () => {
@@ -219,24 +253,29 @@ const App: React.FC = () => {
   // Hull registry handlers
   const addHull = (h: Hull) => {
     setHulls((prev) => {
-      if (prev.some((p) => p.Ship === h.Ship)) return prev;
+      if (prev.some((p) => eqCI(p.Ship, h.Ship))) return prev;
       const next = [...prev, h];
-      return next.sort((a, b) => a.Ship.localeCompare(b.Ship));
+      return next.sort((a, b) =>
+        a.Ship.localeCompare(b.Ship, undefined, { sensitivity: 'base' }),
+      );
     });
   };
   const removeHull = (ship: string) => {
     if (!confirm(`Permanently remove hull "${ship}"?`)) return;
-    setHulls((prev) => prev.filter((p) => p.Ship !== ship));
+    setHulls((prev) => prev.filter((p) => !eqCI(p.Ship, ship)));
     setInUse((prev) =>
-      prev.map((it) => (it.hull === ship ? { ...it, hull: '' } : it)),
+      prev.map((it) => (eqCI(it.hull, ship) ? { ...it, hull: '' } : it)),
     );
   };
   const importHulls = (h: Hull[]) => {
     setHulls((prev) => {
-      const map = new Map(prev.map((p) => [p.Ship, p]));
-      h.forEach((x) => map.set(x.Ship, x));
+      const map = new Map<string, Hull>();
+      for (const p of prev) map.set(ci(p.Ship), p);
+      for (const x of h) map.set(ci(x.Ship), x);
       const merged = Array.from(map.values());
-      return merged.sort((a, b) => a.Ship.localeCompare(b.Ship));
+      return merged.sort((a, b) =>
+        a.Ship.localeCompare(b.Ship, undefined, { sensitivity: 'base' }),
+      );
     });
   };
   const clearHulls = () => {
@@ -248,43 +287,50 @@ const App: React.FC = () => {
   // Tag registry handlers
   const addTagCategory = (cat: TagCategory) => {
     setTagsState((prev) => {
-      if (prev.some((p) => p.category === cat.category)) return prev;
+      if (prev.some((p) => eqCI(p.category, cat.category))) return prev;
       const next = [
         ...prev,
         {
           category: cat.category,
-          tags: [...cat.tags].sort((a, b) => a.localeCompare(b)),
+          tags: sortStringsCI([...cat.tags]),
         },
       ];
-      return next.sort((a, b) => a.category.localeCompare(b.category));
+      return next.sort((a, b) =>
+        a.category.localeCompare(b.category, undefined, {
+          sensitivity: 'base',
+        }),
+      );
     });
   };
   const removeTagCategory = (category: string) => {
     if (!confirm(`Permanently remove category "${category}"?`)) return;
-    setTagsState((prev) => prev.filter((p) => p.category !== category));
+    setTagsState((prev) => prev.filter((p) => !eqCI(p.category, category)));
     setInUse((prev) =>
       prev.map((it) => ({
         ...it,
         tags: it.tags.filter((t) => {
-          // keep tags that still exist in remaining categories
-          return tagsState.some((c) => c.tags.includes(t));
+          // keep tags that still exist in remaining categories (case-insensitive)
+          return tagsState.some((c) => includesCI(c.tags, t));
         }),
       })),
     );
   };
   const importTagCategories = (cats: TagCategory[]) => {
     setTagsState((prev) => {
-      const map = new Map(
-        prev.map((p) => [p.category, p] as [string, TagCategory]),
-      );
+      const map = new Map<string, TagCategory>();
+      for (const p of prev) map.set(ci(p.category), p);
       cats.forEach((c) =>
-        map.set(c.category, {
+        map.set(ci(c.category), {
           category: c.category,
-          tags: [...c.tags].sort((a, b) => a.localeCompare(b)),
+          tags: sortStringsCI([...c.tags]),
         }),
       );
       const merged = Array.from(map.values());
-      return merged.sort((a, b) => a.category.localeCompare(b.category));
+      return merged.sort((a, b) =>
+        a.category.localeCompare(b.category, undefined, {
+          sensitivity: 'base',
+        }),
+      );
     });
   };
   const clearTagCategories = () => {
@@ -295,15 +341,19 @@ const App: React.FC = () => {
 
   // Restore defaults handlers
   const restoreDefaultNames = () => {
-    setShipNames(() => [...defaultNames].sort((a, b) => a.localeCompare(b)));
+    setShipNames(() => sortStringsCI([...defaultNames]));
   };
 
   const restoreDefaultHulls = () => {
-    setHulls(() => [...allHulls].sort((a, b) => a.Ship.localeCompare(b.Ship)));
+    setHulls(() =>
+      [...allHulls].sort((a, b) =>
+        a.Ship.localeCompare(b.Ship, undefined, { sensitivity: 'base' }),
+      ),
+    );
     setInUse((prev) =>
       prev.map((it) => ({
         ...it,
-        hull: allHulls.some((h) => h.Ship === it.hull) ? it.hull : '',
+        hull: allHulls.some((h) => eqCI(h.Ship, it.hull)) ? it.hull : '',
       })),
     );
   };
@@ -312,15 +362,21 @@ const App: React.FC = () => {
     const sortedInit = tagCategories
       .map((c) => ({
         category: c.category,
-        tags: [...c.tags].sort((x, y) => x.localeCompare(y)),
+        tags: sortStringsCI([...c.tags]),
       }))
-      .sort((a, b) => a.category.localeCompare(b.category));
+      .sort((a, b) =>
+        a.category.localeCompare(b.category, undefined, {
+          sensitivity: 'base',
+        }),
+      );
     setTagsState(sortedInit);
-    const allTagSet = new Set(sortedInit.flatMap((c) => c.tags));
+    const allTagSet = new Set(
+      sortedInit.flatMap((c) => c.tags.map((t) => ci(t))),
+    );
     setInUse((prev) =>
       prev.map((it) => ({
         ...it,
-        tags: it.tags.filter((t) => allTagSet.has(t)),
+        tags: it.tags.filter((t) => allTagSet.has(ci(t))),
       })),
     );
   };
@@ -341,21 +397,21 @@ const App: React.FC = () => {
   };
 
   const addNewName = (name: string) => {
-    if (!name || shipNames.includes(name)) return;
-    setShipNames((prev) => {
-      const next = [...prev, name];
-      next.sort((a, b) => a.localeCompare(b));
-      return next;
-    });
+    if (!name || includesCI(shipNames, name)) return;
+    setShipNames((prev) => uniqueSortStringsCI([...prev, name]));
   };
 
   const removeName = (name: string) => {
     if (!confirm(`Permanently remove "${name}" from the registry?`)) return;
-    setShipNames((prev) => prev.filter((n) => n !== name));
+    setShipNames((prev) => prev.filter((n) => !eqCI(n, name)));
     setInUse((prev) =>
       prev
-        .filter((i) => i.shipName !== name)
-        .sort((a, b) => a.shipName.localeCompare(b.shipName)),
+        .filter((i) => !eqCI(i.shipName, name))
+        .sort((a, b) =>
+          a.shipName.localeCompare(b.shipName, undefined, {
+            sensitivity: 'base',
+          }),
+        ),
     );
   };
 
@@ -375,16 +431,18 @@ const App: React.FC = () => {
           : [];
         return { shipName, hull, tags } as FleetItem;
       })
-      .sort((a, b) => a.shipName.localeCompare(b.shipName));
+      .sort((a, b) =>
+        a.shipName.localeCompare(b.shipName, undefined, {
+          sensitivity: 'base',
+        }),
+      );
 
     setInUse(normalized);
 
     // merge ship names from imported fleet into registry
-    setShipNames((prev) => {
-      const set = new Set(prev);
-      normalized.forEach((f) => set.add(f.shipName));
-      return Array.from(set).sort((a, b) => a.localeCompare(b));
-    });
+    setShipNames((prev) =>
+      uniqueSortStringsCI([...prev, ...normalized.map((f) => f.shipName)]),
+    );
   };
 
   return (

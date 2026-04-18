@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ci, includesCI, eqCI } from '../utils/strings';
 import { FleetItem, Hull } from '../types';
 import { TagCategory } from '../types';
 
@@ -33,9 +34,7 @@ const EditModal: React.FC<Props> = ({
   tagCategories,
   close,
 }) => {
-  const filtered = allHulls.filter((h) =>
-    h.Ship.toLowerCase().includes(hullSearch.toLowerCase()),
-  );
+  const filtered = allHulls.filter((h) => ci(h.Ship).includes(ci(hullSearch)));
 
   const [step, setStep] = useState<'hull' | 'tags'>('hull');
   const [tagSearch] = useState<string>('');
@@ -44,16 +43,14 @@ const EditModal: React.FC<Props> = ({
     tagCategories
       .map((cat) => ({
         category: cat.category,
-        tags: cat.tags.filter((t) =>
-          t.toLowerCase().includes(tagSearch.toLowerCase()),
-        ),
+        tags: cat.tags.filter((t) => ci(t).includes(ci(tagSearch))),
       }))
       .filter((c) => c.tags.length > 0);
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev: string[]) => {
-      const has = prev.includes(tag);
-      if (has) return prev.filter((t) => t !== tag);
+      const has = includesCI(prev, tag);
+      if (has) return prev.filter((t) => !eqCI(t, tag));
       return [...prev, tag];
     });
   };
@@ -115,7 +112,7 @@ const EditModal: React.FC<Props> = ({
                       setSelectedHull(hull.Ship);
                       setStep('tags');
                     }}
-                    className={`hull-row ${selectedHull === hull.Ship ? 'selected' : ''}`}
+                    className={`hull-row ${eqCI(selectedHull, hull.Ship) ? 'selected' : ''}`}
                   >
                     <div>
                       <strong>{hull.Ship}</strong>
@@ -144,7 +141,7 @@ const EditModal: React.FC<Props> = ({
                     <div className='tag-category-name'>{cat.category}</div>
                     <div className='tag-grid'>
                       {cat.tags.map((tag) => {
-                        const isSelected = selectedTags.includes(tag);
+                        const isSelected = includesCI(selectedTags, tag);
                         return (
                           <div
                             key={tag}
