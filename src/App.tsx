@@ -146,14 +146,16 @@ const App: React.FC = () => {
     if (!currentRandom) return;
     setInUse((prev) => {
       const next = [...prev, { shipName: currentRandom, hull: '', tags: [] }];
-      setEditingIndex(next.length - 1);
+      const sorted = next.sort((a, b) => a.shipName.localeCompare(b.shipName));
+      const newIndex = sorted.findIndex((s) => s.shipName === currentRandom);
+      setEditingIndex(newIndex);
       setSelectedHull('');
       setSelectedTags([]);
       setHullSearch('');
       setModal('edit');
-      const available = getAvailable(shipNames, next);
+      const available = getAvailable(shipNames, sorted);
       setCurrentRandom(chooseRandom(available));
-      return next.sort((a, b) => a.shipName.localeCompare(b.shipName));
+      return sorted;
     });
   };
 
@@ -167,14 +169,16 @@ const App: React.FC = () => {
 
     setInUse((prev) => {
       const next = [...prev, { shipName: name, hull: '', tags: [] }];
-      setEditingIndex(next.length - 1);
+      const sorted = next.sort((a, b) => a.shipName.localeCompare(b.shipName));
+      const newIndex = sorted.findIndex((s) => s.shipName === name);
+      setEditingIndex(newIndex);
       setSelectedHull('');
       setSelectedTags([]);
       setHullSearch('');
       setModal('edit');
-      const available = getAvailable(shipNames, next);
+      const available = getAvailable(shipNames, sorted);
       setCurrentRandom(chooseRandom(available));
-      return next.sort((a, b) => a.shipName.localeCompare(b.shipName));
+      return sorted;
     });
   };
 
