@@ -1,0 +1,100 @@
+[
+  {
+    "category": "Core Activities",
+    "tags": [
+      "abyss",
+      "explorer",
+      "gank",
+      "hauler",
+      "huffer",
+      "incursion",
+      "mining",
+      "mission",
+      "pve",
+      "pvp",
+      "ratter",
+      "salvager",
+      "sleeper",
+      "structure bash",
+      "travel"
+    ]
+  },
+  {
+    "category": "Combat & Fleet Roles",
+    "tags": [
+      "brawler",
+      "bomber",
+      "booster",
+      "dps",
+      "drone boat",
+      "heavy tackle",
+      "hic",
+      "interdictor",
+      "kiter",
+      "logi",
+      "missile boat",
+      "recon",
+      "sniper",
+      "tackle"
+    ]
+  },
+  {
+    "category": "EWAR",
+    "tags": ["damp", "ecm", "ewar", "neut", "td", "tp", "web"]
+  },
+  {
+    "category": "Scouting & Exploration",
+    "tags": [
+      "cloaky",
+      "covert ops",
+      "data",
+      "prober",
+      "relic",
+      "scout",
+      "wormhole scanner"
+    ]
+  },
+  {
+    "category": "Industrial & Mining",
+    "tags": ["gas miner", "ice miner", "miner", "mining booster"]
+  },
+  {
+    "category": "Fit & Tank Styles",
+    "tags": [
+      "active tank",
+      "armor",
+      "brick",
+      "buffer",
+      "cap stable",
+      "nano",
+      "passive tank",
+      "shield",
+      "speed"
+    ]
+  },
+  {
+    "category": "Capital Specific",
+    "tags": [
+      "black ops",
+      "cap chain",
+      "covert cyno",
+      "cyno",
+      "fighter",
+      "siege",
+      "triage"
+    ]
+  },
+  {
+    "category": "Niche & Utility",
+    "tags": [
+      "afk",
+      "bait",
+      "gate camper",
+      "links",
+      "ninja",
+      "pochven",
+      "smartbomber",
+      "wormhole"
+    ]
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "name": "aether-fleet-ops",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run build && webpack serve --mode development --open",
+    "build": "npm run lint && npm run format && tsc && webpack --mode production",
+    "skipchecks": "webpack serve --mode development --open",
+    "lint": "eslint \"src/**/*.{cjs,mjs,js,jsx,ts,tsx,mts,cts}\" --quiet --fix",
+    "format": "prettier --write \"src/**/*.{cjs,mjs,js,jsx,ts,tsx,mts,cts,json,html,css}\"",
+    "update": "ncu -u"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "7.x",
+    "@babel/core": "7.x",
+    "@babel/preset-env": "7.x",
+    "@babel/preset-react": "7.x",
+    "@babel/preset-typescript": "7.x",
+    "@types/lodash": "4.x",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "babel-loader": "10.x",
+    "copy-webpack-plugin": "^14.0.0",
+    "css-loader": "7.x",
+    "eslint": "9.38.x",
+    "html-webpack-plugin": "5.x",
+    "npm-check-updates": "19.x",
+    "prettier": "3.x",
+    "style-loader": "4.x",
+    "typescript": "5.x",
+    "typescript-eslint": "8.x",
+    "webpack": "5.x",
+    "webpack-cli": "6.x",
+    "webpack-dev-server": "5.x"
+  },
+  "dependencies": {
+    "react": "19.x",
+    "react-dom": "19.x"
+  }
+}

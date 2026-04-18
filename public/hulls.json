@@ -1,0 +1,2546 @@
+[
+  {
+    "Ship": "Abaddon",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Absolution",
+    "Type": "Command Ship",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Adrestia",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Aeon",
+    "Type": "Supercarrier",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Algos",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Aliastra Catalyst",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Alligator",
+    "Type": "Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Amarr Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Anathema",
+    "Type": "Covert Ops",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Anshar",
+    "Type": "Jump Freighter",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Apocalypse",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Apocalypse Imperial Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Apocalypse Navy Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Apostle",
+    "Type": "Force Auxiliary",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Apotheosis",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Jove"
+  },
+  {
+    "Ship": "Arazu",
+    "Type": "Force Recon Ship",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Arbitrator",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Archon",
+    "Type": "Carrier",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Ares",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Ark",
+    "Type": "Jump Freighter",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Armageddon",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Armageddon Imperial Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Armageddon Navy Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Ashimmu",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Astarte",
+    "Type": "Command Ship",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Astero",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Atron",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Augoror",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Augoror Navy Issue",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Avalanche",
+    "Type": "Freighter",
+    "Tech": "T1",
+    "Faction": "Upwell"
+  },
+  {
+    "Ship": "Avatar",
+    "Type": "Titan",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Azariel",
+    "Type": "Titan",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Badger",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Bane",
+    "Type": "Lancer Dreadnought",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Bantam",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Barghest",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Basilisk",
+    "Type": "Logistics",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Bellicose",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Bestla",
+    "Type": "Heavy Assault cruiser",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Bestower",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Bhaalgorn",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Bifrost",
+    "Type": "Command Destroyer",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Blackbird",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Boobook",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Bowhead",
+    "Type": "Freighter",
+    "Tech": "T1",
+    "Faction": "Upwell"
+  },
+  {
+    "Ship": "Breacher",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Broadsword",
+    "Type": "Heavy Interdiction Cruiser",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Brutix",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Brutix Navy Issue",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Burst",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Bustard",
+    "Type": "Deep Space Transport",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Buzzard",
+    "Type": "Covert Ops",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Caedes",
+    "Type": "Covert Ops",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Caiman",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Caldari Navy Hookbill",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Caldari Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Cambion",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Caracal",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Caracal Navy Issue",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Catalyst",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Catalyst Navy Issue",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Celestis",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Cenotaph",
+    "Type": "Battlecruiser",
+    "Tech": "T2",
+    "Faction": "Deathless Circle"
+  },
+  {
+    "Ship": "Cerberus",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Chameleon",
+    "Type": "Force Recon Ship",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Charon",
+    "Type": "Freighter",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Cheetah",
+    "Type": "Covert Ops",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Chemosh",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Chimera",
+    "Type": "Carrier",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Chremoas",
+    "Type": "Covert Ops",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Civilian Amarr Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Civilian Caldari Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Civilian Gallente Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Civilian Minmatar Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Claw",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Claymore",
+    "Type": "Command Ship",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Cobra",
+    "Type": "Recon",
+    "Tech": "T2",
+    "Faction": "Guristas"
+  },
+  {
+    "Ship": "Coercer",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Coercer Navy Issue",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Condor",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Confessor",
+    "Type": "Tactical Destroyer",
+    "Tech": "T3",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Corax",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Cormorant",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Cormorant Navy Issue",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Council Diplomatic Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Covetor",
+    "Type": "Mining Barge",
+    "Tech": "T1",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Crane",
+    "Type": "Blockade Runner",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Crow",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Crucifier",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Crucifier Navy Issue",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Cruor",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Crusader",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Curse",
+    "Type": "Combat Recon Ship",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Cybele",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Cyclone",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Cyclone Fleet Issue",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Cynabal",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Dagon",
+    "Type": "Force Auxiliary",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Damavik",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Damnation",
+    "Type": "Command Ship",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Daredevil",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Deacon",
+    "Type": "Logistics Frigate",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Deimos",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Deluge",
+    "Type": "Blockade Runner",
+    "Tech": "T2",
+    "Faction": "Upwell"
+  },
+  {
+    "Ship": "Devoter",
+    "Type": "Heavy Interdiction Cruiser",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Dominix",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Dominix Navy Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Dragoon",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Drake",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Drake Navy Issue",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Dramiel",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Draugur",
+    "Type": "Destroyer",
+    "Tech": "T2",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Drekavac",
+    "Type": "Battlecriuser",
+    "Tech": "T1",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Eagle",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Echelon",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Echo",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Eidolon",
+    "Type": "Battleship",
+    "Tech": "T2",
+    "Faction": "Jovian"
+  },
+  {
+    "Ship": "Endurance",
+    "Type": "Expedition Frigate",
+    "Tech": "T2",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Enforcer",
+    "Type": "Force Recon Ship",
+    "Tech": "T2",
+    "Faction": "None"
+  },
+  {
+    "Ship": "Enyo",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Eos",
+    "Type": "Command Ship",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Epithal",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Erebus",
+    "Type": "Titan",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Eris",
+    "Type": "Interdictor",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Etana",
+    "Type": "Logistics",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Executioner",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Exequror",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Exequror Navy Issue",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Falcon",
+    "Type": "Force Recon Ship",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Federation Navy Comet",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Fenrir",
+    "Type": "Freighter",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Ferox",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Ferox Navy Issue",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Fiend",
+    "Type": "Heavy Interdiction Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Flycatcher",
+    "Type": "Interdictor",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Freki",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Gallente Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Garmur",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Geri",
+    "Type": "Assault Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Gila",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Gnosis",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Jove"
+  },
+  {
+    "Ship": "Gold Magnate",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Golem",
+    "Type": "Marauder",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Goru's Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Griffin",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Griffin Navy Issue",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Guardian",
+    "Type": "Logistics",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Guardian-Vexor",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Guristas Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Harbinger",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Harbinger Navy Issue",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Harpy",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Hawk",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Hecate",
+    "Type": "Tactical Destroyer",
+    "Tech": "T3",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Hel",
+    "Type": "Supercarrier",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Helios",
+    "Type": "Covert Ops",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Hematos",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Heretic",
+    "Type": "Interdictor",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Heron",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Heron Navy Issue",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Hoarder",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Hound",
+    "Type": "Stealth Bomber",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Hubris",
+    "Type": "Lancer Dreadnought",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Huginn",
+    "Type": "Combat Recon Ship",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Hulk",
+    "Type": "Exhumer",
+    "Tech": "T2",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Hurricane",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Hurricane Fleet Issue",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Hydra",
+    "Type": "Covert Ops Frigate",
+    "Tech": "T2",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Hyena",
+    "Type": "Electronic Attack Ship",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Hyperion",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Ibis",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Ikitursa",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Imicus",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Imicus Navy Issue",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Immolator",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Imp",
+    "Type": "Interceptor",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Impairor",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Impel",
+    "Type": "Deep Space Transport",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Imperial Navy Slicer",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Incursus",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Inner Zone Shipping Catalyst",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Inner Zone Shipping Imicus",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Inquisitor",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Intaki Syndicate Catalyst",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "InterBus Catalyst",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "InterBus Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Ishkur",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Ishtar",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Iteron Mark V",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Ixion",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Angel Cartel"
+  },
+  {
+    "Ship": "Jackdaw",
+    "Type": "Tactical Destroyer",
+    "Tech": "T3",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Jaguar",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Karura",
+    "Type": "Lancer Dreadnought",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Keres",
+    "Type": "Electronic Attack Ship",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Kestrel",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Khizriel",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Kikimora",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Kirin",
+    "Type": "Logistics Frigate",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Kitsune",
+    "Type": "Electronic Attack Ship",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Komodo",
+    "Type": "Titan",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Kronos",
+    "Type": "Marauder",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Kryos",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Lachesis",
+    "Type": "Combat Recon Ship",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Laelaps",
+    "Type": "Heavy Interdiction Cruiser",
+    "Tech": "F",
+    "Faction": "Mordu's"
+  },
+  {
+    "Ship": "Legion",
+    "Type": "Strategic Cruiser",
+    "Tech": "T3",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Leopard",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Leshak",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Leviathan",
+    "Type": "Titan",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Lif",
+    "Type": "Force Auxiliary",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Loggerhead",
+    "Type": "Force Auxiliary",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Loki",
+    "Type": "Strategic Cruiser",
+    "Tech": "T3",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Machariel",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Mackinaw",
+    "Type": "Exhumer",
+    "Tech": "T2",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Maelstrom",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Magnate",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Magnate Navy Issue",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Magus",
+    "Type": "Command Destroyer",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Malediction",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Malice",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Maller",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Mamba",
+    "Type": "Destroyer",
+    "Tech": "F",
+    "Faction": "Guristas"
+  },
+  {
+    "Ship": "Mammoth",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Manticore",
+    "Type": "Stealth Bomber",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Marshal",
+    "Type": "Black Ops",
+    "Tech": "T2",
+    "Faction": "None"
+  },
+  {
+    "Ship": "Mastodon",
+    "Type": "Deep Space Transport",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Maulus",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Maulus Navy Issue",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Medusa",
+    "Type": "Frigate",
+    "Tech": "T2",
+    "Faction": "Jovian/Angel Cartel"
+  },
+  {
+    "Ship": "Megathron",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Megathron Federate Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Megathron Navy Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Mekubal",
+    "Type": "Destroyer",
+    "Tech": "F",
+    "Faction": "Angel"
+  },
+  {
+    "Ship": "Merlin",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Metamorphosis",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Jove"
+  },
+  {
+    "Ship": "Miasmos",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Miasmos Amastris Edition",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Miasmos Quafe Ultra Edition",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Miasmos Quafe Ultramarine Edition",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Mimir",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Minmatar Shuttle",
+    "Type": "Shuttle",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Minokawa",
+    "Type": "Force Auxiliary",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Moa",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Molok",
+    "Type": "Titan",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Monitor",
+    "Type": "Flag Cruiser",
+    "Tech": "T2",
+    "Faction": "None"
+  },
+  {
+    "Ship": "Moracha",
+    "Type": "Force Recon Ship",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Moros",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Moros Navy Issue",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Muninn",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Myrmidon",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Myrmidon Navy Issue",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Naga",
+    "Type": "Attack Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Naglfar",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Naglfar Fleet Issue",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Navitas",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Nefantar Thrasher",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Nemesis",
+    "Type": "Stealth Bomber",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Nereus",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Nergal",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Nestor",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Nidhoggur",
+    "Type": "Carrier",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Nighthawk",
+    "Type": "Command Ship",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Nightmare",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Ninazu",
+    "Type": "Force Auxiliary",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Noctis",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Nomad",
+    "Type": "Jump Freighter",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Nyx",
+    "Type": "Supercarrier",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Obelisk",
+    "Type": "Freighter",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Occator",
+    "Type": "Deep Space Transport",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Omen",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Omen Navy Issue",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Oneiros",
+    "Type": "Logistics",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Onyx",
+    "Type": "Heavy Interdiction Cruiser",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Opux Luxury Yacht",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Oracle",
+    "Type": "Attack Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Orca",
+    "Type": "Industrial Command Ship",
+    "Tech": "T1",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Orthrus",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Osprey",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Osprey Navy Issue",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Pacifier",
+    "Type": "Covert Ops",
+    "Tech": "T2",
+    "Faction": "None"
+  },
+  {
+    "Ship": "Paladin",
+    "Type": "Marauder",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Panther",
+    "Type": "Black Ops",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Phantasm",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Phantom",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Jovian"
+  },
+  {
+    "Ship": "Phobos",
+    "Type": "Heavy Interdiction Cruiser",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Phoenix",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Phoenix Navy Issue",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Pilgrim",
+    "Type": "Force Recon Ship",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Pontifex",
+    "Type": "Command Destroyer",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Porpoise",
+    "Type": "Industrial Command Ship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Praxis",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Jove"
+  },
+  {
+    "Ship": "Primae",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Probe",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Probe Fleet Issue",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Procurer",
+    "Type": "Mining Barge",
+    "Tech": "T1",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Prophecy",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Prophecy Navy Issue",
+    "Type": "Combat Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Prorator",
+    "Type": "Blockade Runner",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Prospect",
+    "Type": "Expedition Frigate",
+    "Tech": "T2",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Proteus",
+    "Type": "Strategic Cruiser",
+    "Tech": "T3",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Providence",
+    "Type": "Freighter",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Prowler",
+    "Type": "Blockade Runner",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Punisher",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Purifier",
+    "Type": "Stealth Bomber",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Python",
+    "Type": "Black Ops",
+    "Tech": "T2",
+    "Faction": "Guristas"
+  },
+  {
+    "Ship": "Quafe Catalyst",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Rabisu",
+    "Type": "Logistics",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Ragnarok",
+    "Type": "Titan",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Raiju",
+    "Type": "Electronic Attack Ship",
+    "Tech": "F",
+    "Faction": "Mordu's"
+  },
+  {
+    "Ship": "Rapier",
+    "Type": "Force Recon Ship",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Raptor",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Rattlesnake",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Guristas"
+  },
+  {
+    "Ship": "Rattlesnake Victory Edition",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Guristas"
+  },
+  {
+    "Ship": "Raven",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Raven Navy Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Raven State Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Reaper",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Redeemer",
+    "Type": "Black Ops",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Republic Fleet Firetail",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Retribution",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Retriever",
+    "Type": "Mining Barge",
+    "Tech": "T1",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Revelation",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Revelation Navy Issue",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Revenant",
+    "Type": "Supercarrier",
+    "Tech": "T1",
+    "Faction": "Pirate"
+  },
+  {
+    "Ship": "Rhea",
+    "Type": "Jump Freighter",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Rifter",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Rodiva",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Rokh",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Rook",
+    "Type": "Combat Recon Ship",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Rorqual",
+    "Type": "Capital Industrial Ship",
+    "Tech": "T1",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Rupture",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Sabre",
+    "Type": "Interdictor",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Sacrilege",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Sarum Magnate",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Scalpel",
+    "Type": "Logistics Frigate",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Scimitar",
+    "Type": "Logistics",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Scorpion",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Scorpion Ishukone Watch",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Scorpion Navy Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Scythe",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Scythe Fleet Issue",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Sentinel",
+    "Type": "Electronic Attack Ship",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Shapash",
+    "Type": "Assault Frigate",
+    "Tech": "",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Sidewinder",
+    "Type": "Frigate",
+    "Tech": "T2",
+    "Faction": "Guristas"
+  },
+  {
+    "Ship": "Sigil",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Silver Magnate",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Sin",
+    "Type": "Black Ops",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Skiff",
+    "Type": "Exhumer",
+    "Tech": "T2",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Skybreaker",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Edencom"
+  },
+  {
+    "Ship": "Slasher",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Sleipnir",
+    "Type": "Command Ship",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Specter",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Jovian"
+  },
+  {
+    "Ship": "Squall",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Upwell"
+  },
+  {
+    "Ship": "Stabber",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Stabber Fleet Issue",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Stiletto",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Stork",
+    "Type": "Command Destroyer",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Stormbringer",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Edencom"
+  },
+  {
+    "Ship": "Stratios",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Stratios Emergency Responder",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Succubus",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Sukuuvestaa Heron",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Sunesis",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Jove"
+  },
+  {
+    "Ship": "Svipul",
+    "Type": "Tactical Destroyer",
+    "Tech": "T3",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Taipan",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Talos",
+    "Type": "Attack Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Talwar",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Taranis",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Tash-Murkon Magnate",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Tayra",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Tempest",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Tempest Fleet Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Tempest Tribal Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Tengu",
+    "Type": "Strategic Cruiser",
+    "Tech": "T3",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Thalia",
+    "Type": "Logistics Frigate",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Thanatos",
+    "Type": "Carrier",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Tholos",
+    "Type": "Destroyer",
+    "Tech": "T2",
+    "Faction": "Deathless Circle"
+  },
+  {
+    "Ship": "Thorax",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Thrasher",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Thrasher Fleet Issue",
+    "Type": "Destroyer",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Thunderchild",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Edencom"
+  },
+  {
+    "Ship": "Tiamat",
+    "Type": "Cruiser",
+    "Tech": "T2",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Tormentor",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Tornado",
+    "Type": "Attack Battlecruiser",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Torrent",
+    "Type": "Deep Space Transport",
+    "Tech": "T2",
+    "Faction": "Upwell"
+  },
+  {
+    "Ship": "Tristan",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Typhoon",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Typhoon Fleet Issue",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Utu",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Vagabond",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Valravn",
+    "Type": "Lancer Dreadnought",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Vangel",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Vanquisher",
+    "Type": "Titan",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Vargur",
+    "Type": "Marauder",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Vedmak",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Vehement",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Velator",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Vendetta",
+    "Type": "Supercarrier",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Vengeance",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Venture",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "ORE"
+  },
+  {
+    "Ship": "Vexor",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Vexor Navy Issue",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Vherokior Probe",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Viator",
+    "Type": "Blockade Runner",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Victor",
+    "Type": "Force Recon Ship",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Victorieux Luxury Yacht",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Vigil",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Vigil Fleet Issue",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Vigilant",
+    "Type": "Cruiser",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Vindicator",
+    "Type": "Battleship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Violator",
+    "Type": "Corvette",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Virtuoso",
+    "Type": "Stealth Bomber",
+    "Tech": "T2",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Visitant",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Jovian"
+  },
+  {
+    "Ship": "Vulture",
+    "Type": "Command Ship",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Whiptail",
+    "Type": "Interceptor",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Widow",
+    "Type": "Black Ops",
+    "Tech": "T2",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Wolf",
+    "Type": "Assault Frigate",
+    "Tech": "T2",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Worm",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Wraith",
+    "Type": "Frigate",
+    "Tech": "T1",
+    "Faction": "Jovian"
+  },
+  {
+    "Ship": "Wreathe",
+    "Type": "Hauler",
+    "Tech": "T1",
+    "Faction": "Minmatar"
+  },
+  {
+    "Ship": "Wyvern",
+    "Type": "Supercarrier",
+    "Tech": "T1",
+    "Faction": "Caldari"
+  },
+  {
+    "Ship": "Zarmazd",
+    "Type": "Support Cruiser",
+    "Tech": "T2",
+    "Faction": "Triglavian"
+  },
+  {
+    "Ship": "Zealot",
+    "Type": "Heavy Assault Cruiser",
+    "Tech": "T2",
+    "Faction": "Amarr"
+  },
+  {
+    "Ship": "Zephyr",
+    "Type": "Compact Exploration Ship",
+    "Tech": "T1",
+    "Faction": "Gallente"
+  },
+  {
+    "Ship": "Zirnitra",
+    "Type": "Dreadnought",
+    "Tech": "T1",
+    "Faction": "Triglavian"
+  }
+]
