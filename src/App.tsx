@@ -262,10 +262,8 @@ const App: React.FC = () => {
   };
   const removeHull = (ship: string) => {
     if (!confirm(`Permanently remove hull "${ship}"?`)) return;
+    // Remove hull from registry only. Do not modify deployed ships' hull assignments.
     setHulls((prev) => prev.filter((p) => !eqCI(p.Ship, ship)));
-    setInUse((prev) =>
-      prev.map((it) => (eqCI(it.hull, ship) ? { ...it, hull: '' } : it)),
-    );
   };
   const importHulls = (h: Hull[]) => {
     setHulls((prev) => {
@@ -280,8 +278,8 @@ const App: React.FC = () => {
   };
   const clearHulls = () => {
     if (!confirm('Clear all hulls?')) return;
+    // Clear the hull registry but preserve hull assignments on deployed ships.
     setHulls([]);
-    setInUse((prev) => prev.map((it) => ({ ...it, hull: '' })));
   };
 
   // Tag registry handlers
@@ -304,16 +302,8 @@ const App: React.FC = () => {
   };
   const removeTagCategory = (category: string) => {
     if (!confirm(`Permanently remove category "${category}"?`)) return;
+    // Remove the category from the registry only. Do not modify deployed ships' tags.
     setTagsState((prev) => prev.filter((p) => !eqCI(p.category, category)));
-    setInUse((prev) =>
-      prev.map((it) => ({
-        ...it,
-        tags: it.tags.filter((t) => {
-          // keep tags that still exist in remaining categories (case-insensitive)
-          return tagsState.some((c) => includesCI(c.tags, t));
-        }),
-      })),
-    );
   };
   const importTagCategories = (cats: TagCategory[]) => {
     setTagsState((prev) => {
@@ -335,8 +325,8 @@ const App: React.FC = () => {
   };
   const clearTagCategories = () => {
     if (!confirm('Clear all tag categories?')) return;
+    // Clear the tag registry but preserve tags on deployed ships.
     setTagsState([]);
-    setInUse((prev) => prev.map((it) => ({ ...it, tags: [] })));
   };
 
   // Restore defaults handlers
@@ -403,24 +393,16 @@ const App: React.FC = () => {
 
   const removeName = (name: string) => {
     if (!confirm(`Permanently remove "${name}" from the registry?`)) return;
+    // Remove the name from the registry only. Do not delete deployed ships that use this name.
     setShipNames((prev) => prev.filter((n) => !eqCI(n, name)));
-    setInUse((prev) =>
-      prev
-        .filter((i) => !eqCI(i.shipName, name))
-        .sort((a, b) =>
-          a.shipName.localeCompare(b.shipName, undefined, {
-            sensitivity: 'base',
-          }),
-        ),
-    );
   };
 
   const exportFleet = () => {
-    exportFleetData(shipNames, inUse);
+    exportFleetData(inUse);
   };
 
   const importFleet = (fleet: FleetItem[]) => {
-    // normalize incoming objects and set fleet, also merge any missing ship names
+    // normalize incoming objects and set fleet
     const normalized = fleet
       .map((p) => {
         const shipName = typeof p.shipName === 'string' ? p.shipName : '';
@@ -438,11 +420,6 @@ const App: React.FC = () => {
       );
 
     setInUse(normalized);
-
-    // merge ship names from imported fleet into registry
-    setShipNames((prev) =>
-      uniqueSortStringsCI([...prev, ...normalized.map((f) => f.shipName)]),
-    );
   };
 
   return (

@@ -17,18 +17,7 @@ export const chooseRandom = (available: string[]) =>
 export const filteredHulls = (allHulls: Hull[], query: string) =>
   allHulls.filter((h) => ci(h.Ship).includes(ci(query)));
 
-export const exportFleetData = (shipNames: string[], inUse: FleetItem[]) => {
-  // Normalize, dedupe and sort shipNames (case-insensitive)
-  const seenNames = new Map<string, string>();
-  for (const n of shipNames) {
-    const trimmed = n.trim();
-    const key = trimmed.toLowerCase();
-    if (trimmed && !seenNames.has(key)) seenNames.set(key, trimmed);
-  }
-  const sortedShipNames = Array.from(seenNames.values()).sort((a, b) =>
-    a.localeCompare(b, undefined, { sensitivity: 'base' }),
-  );
-
+export const exportFleetData = (inUse: FleetItem[]) => {
   // Ensure tags are normalized, deduped, and exported in alphabetical order for consistency
   const normalizeTags = (tags: string[]) => {
     const seen = new Map<string, string>();
@@ -47,11 +36,7 @@ export const exportFleetData = (shipNames: string[], inUse: FleetItem[]) => {
     tags: normalizeTags(it.tags),
   }));
 
-  const data = {
-    version: '4.0-aether',
-    shipNames: sortedShipNames,
-    fleet: sortedFleet,
-  };
+  const data = sortedFleet;
   const blob = new Blob([JSON.stringify(data, null, 2)], {
     type: 'application/json',
   });
