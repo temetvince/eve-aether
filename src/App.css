@@ -88,6 +88,19 @@ body {
   filter: drop-shadow(0 6px 14px rgba(127, 220, 182, 0.06));
 }
 
+/* App header styling */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+  position: relative;
+  z-index: 2;
+}
+
 .live-badge {
   display: inline-flex;
   align-items: center;
@@ -185,6 +198,7 @@ main {
   background: linear-gradient(180deg, var(--paper-tint), rgba(0, 0, 0, 0.08));
   border: 1px solid var(--edge);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+  max-height: fit-content;
 }
 .nav-item {
   padding: 12px 14px;
@@ -245,8 +259,10 @@ main {
   letter-spacing: 1.6px;
 }
 .random-name {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Outfit', system-ui, Inter, sans-serif;
   font-size: 3.6rem;
+  font-weight: 800;
+  text-transform: none;
   text-align: center;
   letter-spacing: -2px;
   color: var(--accent-1);
@@ -254,8 +270,10 @@ main {
   margin-bottom: 12px;
 }
 .random-name-input {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Outfit', system-ui, Inter, sans-serif;
   font-size: 3.6rem;
+  font-weight: 700;
+  text-transform: none;
   text-align: center;
   width: 100%;
   background: transparent;
