@@ -46,20 +46,22 @@ const App: React.FC = () => {
             (p) => typeof p === 'object' && p !== null && 'shipName' in p,
           )
         ) {
-          return (parsed as unknown[]).map((p) => {
-            if (typeof p === 'object' && p !== null) {
-              const obj = p as Record<string, unknown>;
-              const shipName =
-                typeof obj.shipName === 'string' ? obj.shipName : '';
-              const hull = typeof obj.hull === 'string' ? obj.hull : '';
-              const tags =
-                Array.isArray(obj.tags) ?
-                  obj.tags.filter((t): t is string => typeof t === 'string')
-                : [];
-              return { shipName, hull, tags } as FleetItem;
-            }
-            return { shipName: '', hull: '', tags: [] } as FleetItem;
-          });
+          return (parsed as unknown[])
+            .map((p) => {
+              if (typeof p === 'object' && p !== null) {
+                const obj = p as Record<string, unknown>;
+                const shipName =
+                  typeof obj.shipName === 'string' ? obj.shipName : '';
+                const hull = typeof obj.hull === 'string' ? obj.hull : '';
+                const tags =
+                  Array.isArray(obj.tags) ?
+                    obj.tags.filter((t): t is string => typeof t === 'string')
+                  : [];
+                return { shipName, hull, tags } as FleetItem;
+              }
+              return { shipName: '', hull: '', tags: [] } as FleetItem;
+            })
+            .sort((a, b) => a.shipName.localeCompare(b.shipName));
         }
       }
     } catch {
@@ -151,7 +153,7 @@ const App: React.FC = () => {
       setModal('edit');
       const available = getAvailable(shipNames, next);
       setCurrentRandom(chooseRandom(available));
-      return next;
+      return next.sort((a, b) => a.shipName.localeCompare(b.shipName));
     });
   };
 
@@ -172,7 +174,7 @@ const App: React.FC = () => {
       setModal('edit');
       const available = getAvailable(shipNames, next);
       setCurrentRandom(chooseRandom(available));
-      return next;
+      return next.sort((a, b) => a.shipName.localeCompare(b.shipName));
     });
   };
 
@@ -181,7 +183,11 @@ const App: React.FC = () => {
       setInUse([]);
       return;
     }
-    setInUse((prev) => prev.filter((_, i) => i !== index));
+    setInUse((prev) =>
+      prev
+        .filter((_, i) => i !== index)
+        .sort((a, b) => a.shipName.localeCompare(b.shipName)),
+    );
   };
 
   const importNames = (names: string[]) => {
@@ -342,7 +348,11 @@ const App: React.FC = () => {
   const removeName = (name: string) => {
     if (!confirm(`Permanently remove "${name}" from the registry?`)) return;
     setShipNames((prev) => prev.filter((n) => n !== name));
-    setInUse((prev) => prev.filter((i) => i.shipName !== name));
+    setInUse((prev) =>
+      prev
+        .filter((i) => i.shipName !== name)
+        .sort((a, b) => a.shipName.localeCompare(b.shipName)),
+    );
   };
 
   const exportFleet = () => {
@@ -351,15 +361,17 @@ const App: React.FC = () => {
 
   const importFleet = (fleet: FleetItem[]) => {
     // normalize incoming objects and set fleet, also merge any missing ship names
-    const normalized = fleet.map((p) => {
-      const shipName = typeof p.shipName === 'string' ? p.shipName : '';
-      const hull = typeof p.hull === 'string' ? p.hull : '';
-      const tags =
-        Array.isArray(p.tags) ?
-          p.tags.filter((t): t is string => typeof t === 'string')
-        : [];
-      return { shipName, hull, tags } as FleetItem;
-    });
+    const normalized = fleet
+      .map((p) => {
+        const shipName = typeof p.shipName === 'string' ? p.shipName : '';
+        const hull = typeof p.hull === 'string' ? p.hull : '';
+        const tags =
+          Array.isArray(p.tags) ?
+            p.tags.filter((t): t is string => typeof t === 'string')
+          : [];
+        return { shipName, hull, tags } as FleetItem;
+      })
+      .sort((a, b) => a.shipName.localeCompare(b.shipName));
 
     setInUse(normalized);
 
