@@ -45,7 +45,21 @@ const EditModal: React.FC<Props> = ({
         category: cat.category,
         tags: cat.tags.filter((t) => ci(t).includes(ci(tagSearch))),
       }))
-      .filter((c) => c.tags.length > 0);
+      .filter((c) => c.tags.length > 0)
+      .map((c) => ({
+        category: c.category,
+        tags: c.tags
+          .slice()
+          .sort((a, b) =>
+            a.localeCompare(b, undefined, { sensitivity: 'base' }),
+          ),
+      }))
+      .slice()
+      .sort((a, b) =>
+        a.category.localeCompare(b.category, undefined, {
+          sensitivity: 'base',
+        }),
+      );
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev: string[]) => {
