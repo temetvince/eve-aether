@@ -70,6 +70,27 @@ const LaunchInner: React.FC<{
     : <div className='launch-empty'>
         <div className='empty-icon'>🌌</div>
         <p>ALL SHIPS DEPLOYED</p>
+        <div className='add-custom-row'>
+          <input
+            className='random-name-input'
+            value={editName}
+            onChange={(e) => {
+              setEditName(e.target.value);
+            }}
+            placeholder='Enter custom ship name'
+            aria-label='custom-ship-name'
+          />
+          <button
+            className='deploy-btn'
+            onClick={() => {
+              const name = editName.trim();
+              if (!name) return;
+              if (onDeployName) onDeployName(name);
+            }}
+          >
+            ADD SHIP
+          </button>
+        </div>
       </div>;
 };
 
