@@ -8,7 +8,7 @@ interface Props {
 }
 
 const FleetGrid: React.FC<Props> = ({ inUse, openEdit, destroyShip }) => (
-  <div>
+  <div className='fleet-section'>
     <div className='section-header'>
       <h2 className='section-header-title'>ACTIVE FLEET</h2>
       <button

@@ -269,7 +269,7 @@ main {
   height: 60%;
   background: radial-gradient(
     circle,
-    rgba(0, 240, 255, 0.3) 20%,
+    rgba(0, 240, 255, 0.3) 0%,
     transparent 70%
   );
   animation: pulse 8s infinite ease-in-out;
@@ -357,7 +357,11 @@ main {
 
 /* Fleet Grid */
 .fleet-section {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 .section-header {
   display: flex;
@@ -742,6 +746,25 @@ main {
   text-align: center;
   padding: 3rem 0;
   color: #64748b;
+}
+
+/* Global Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(17, 20, 26, 0.8);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #63b3ed;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) rgba(17, 20, 26, 0.8);
 }
 .launch-empty .empty-icon {
   font-size: 6rem;

@@ -33,7 +33,7 @@ const Header: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className='live'>
+      <div className='live-badge'>
         <span className='pulse-dot' />
         LIVE COMMAND NET
       </div>
