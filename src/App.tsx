@@ -25,6 +25,8 @@ import HullRegistry from './components/HullRegistry';
 import TagRegistry from './components/TagRegistry';
 
 const App: React.FC = () => {
+  // sidebar open state; visibility on small screens is controlled by CSS
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const [shipNames, setShipNames] = useState<string[]>(() => {
     try {
       const raw = localStorage.getItem('aetherShipNames');
@@ -432,6 +434,9 @@ const App: React.FC = () => {
           registryCount={shipNames.length}
           deployedCount={inUse.length}
           standbyCount={getAvailable(shipNames, inUse).length}
+          onToggleSidebar={() => {
+            setSidebarOpen((s) => !s);
+          }}
         />
 
         <main>
@@ -449,6 +454,7 @@ const App: React.FC = () => {
             openManage={() => {
               setModal('manage');
             }}
+            open={sidebarOpen}
           />
 
           {/* MAIN CONTENT AREA */}

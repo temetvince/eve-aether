@@ -4,15 +4,26 @@ interface Props {
   registryCount: number;
   deployedCount: number;
   standbyCount: number;
+  onToggleSidebar?: () => void;
 }
 
 const Header: React.FC<Props> = ({
   registryCount,
   deployedCount,
   standbyCount,
+  onToggleSidebar,
 }) => {
   return (
     <header>
+      <button
+        className='hamburger-btn'
+        aria-label='Toggle menu'
+        onClick={() => {
+          if (onToggleSidebar) onToggleSidebar();
+        }}
+      >
+        ☰
+      </button>
       <div className='logo'>
         <span className='logo-icon'>🌌</span>
         AETHER FLEET OPS
@@ -33,10 +44,14 @@ const Header: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className='live-badge'>
+      <a
+        className='live-badge'
+        href='https://astralaide.com'
+        aria-label='Navigate to astralaide.com'
+      >
         <span className='pulse-dot' />
-        LIVE COMMAND NET
-      </div>
+        Navigate to astralaide.com
+      </a>
     </header>
   );
 };

@@ -10,6 +10,7 @@ interface Props {
   onImport?: (fleet: FleetItem[]) => void;
   openHullRegistry?: () => void;
   openTagRegistry?: () => void;
+  open?: boolean;
 }
 
 const Sidebar: React.FC<Props> = ({
@@ -20,8 +21,9 @@ const Sidebar: React.FC<Props> = ({
   onImport,
   openHullRegistry,
   openTagRegistry,
+  open,
 }) => (
-  <div className='sidebar'>
+  <div className={`sidebar ${open ? 'open' : 'collapsed'}`}>
     <div
       onClick={() => {
         setView('dashboard');

@@ -101,6 +101,15 @@ header {
   z-index: 2;
 }
 
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
 .live-badge {
   display: inline-flex;
   align-items: center;
@@ -259,20 +268,21 @@ main {
   letter-spacing: 1.6px;
 }
 .random-name {
-  font-family: 'Outfit', system-ui, Inter, sans-serif;
-  font-size: 3.6rem;
-  font-weight: 800;
+  /* use condensed display font for narrower glyphs */
+  font-family: 'Bebas Neue', 'Outfit', system-ui, Inter, sans-serif;
+  font-size: 3.4rem;
+  font-weight: 700;
   text-transform: none;
   text-align: center;
-  letter-spacing: -2px;
+  letter-spacing: -0.6px;
   color: var(--accent-1);
   text-shadow: 0 8px 30px rgba(255, 77, 166, 0.08);
   margin-bottom: 12px;
 }
 .random-name-input {
-  font-family: 'Outfit', system-ui, Inter, sans-serif;
-  font-size: 3.6rem;
-  font-weight: 700;
+  font-family: 'Bebas Neue', 'Outfit', system-ui, Inter, sans-serif;
+  font-size: 3.2rem;
+  font-weight: 600;
   text-transform: none;
   text-align: center;
   width: 100%;
@@ -772,5 +782,93 @@ html {
   }
   .modal-body {
     max-height: calc(100vh - 140px);
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 700px) {
+  body {
+    overflow: auto;
+  }
+  /* stack header vertically on small screens and center contents */
+  header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+  }
+  .logo {
+    justify-content: center;
+  }
+  .stats-bar {
+    justify-content: center;
+  }
+  .live-badge {
+    align-self: center;
+    margin: 6px 0;
+  }
+  .hamburger-btn {
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 3;
+    color: var(--accent-1);
+  }
+  main {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    height: auto;
+    max-height: none;
+  }
+  .sidebar {
+    width: 100%;
+    order: 1;
+    max-height: none;
+    overflow: visible;
+    padding: 12px;
+  }
+  /* On small screens, hide sidebar by default; show only when `.open` is present */
+  .sidebar {
+    display: none;
+  }
+  .sidebar.open {
+    display: block;
+  }
+  /* ensure main, sidebar, and fleet take full width and are padded on small screens */
+  main,
+  .sidebar,
+  .fleet-section,
+  .app,
+  .content,
+  .launch-bay {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* nav items should span the width of the sidebar on small screens */
+  .sidebar .nav-item {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .content {
+    order: 2;
+  }
+  .launch-bay {
+    order: 0;
+  }
+  .fleet-grid {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: calc(100vh - 260px);
+  }
+  .fleet-card {
+    width: 100%;
+    min-height: min-content;
   }
 }
