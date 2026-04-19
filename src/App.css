@@ -866,4 +866,12 @@ html {
     width: 100%;
     min-height: min-content;
   }
+  /* Ensure modals don't overlap the stacked header on small screens */
+  .modal {
+    align-items: flex-start;
+  }
+  .modal-overlay {
+    /* push modal content below the header area */
+    padding-top: 150px;
+  }
 }
