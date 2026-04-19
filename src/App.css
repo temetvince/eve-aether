@@ -461,7 +461,7 @@ main {
   border-radius: 12px;
   width: 100%;
   max-width: 700px;
-  max-height: calc(100vh - 96px);
+  max-height: calc(100vh * 0.67);
   overflow: hidden;
   padding: 0;
   border: 1px solid var(--edge);
@@ -776,11 +776,7 @@ html {
   }
   .modal-content {
     max-width: calc(100% - 32px);
-    max-height: calc(100vh - 48px);
     border-radius: 10px;
-  }
-  .modal-body {
-    max-height: calc(100vh - 140px);
   }
 }
 
