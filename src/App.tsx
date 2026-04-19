@@ -26,7 +26,7 @@ import TagRegistry from './components/TagRegistry';
 
 const App: React.FC = () => {
   // sidebar open state; visibility on small screens is controlled by CSS
-  const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [shipNames, setShipNames] = useState<string[]>(() => {
     try {
       const raw = localStorage.getItem('aetherShipNames');
