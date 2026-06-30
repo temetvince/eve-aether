@@ -23,11 +23,11 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "7.x",
-    "@babel/core": "7.x",
-    "@babel/preset-env": "7.x",
-    "@babel/preset-react": "7.x",
-    "@babel/preset-typescript": "7.x",
+    "@babel/cli": "8.x",
+    "@babel/core": "8.x",
+    "@babel/preset-env": "8.x",
+    "@babel/preset-react": "8.x",
+    "@babel/preset-typescript": "8.x",
     "@types/lodash": "4.x",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
