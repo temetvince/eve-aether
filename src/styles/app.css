@@ -1,0 +1,651 @@
+/*
+ * Aether Fleet Ops.
+ *
+ * Every colour pair here has been measured against WCAG 2.1 AA in both
+ * editions: 4.5:1 for text, 3:1 for control borders and the focus ring. The
+ * dark edition is the default and the light one is served to anyone whose
+ * system asks for it.
+ */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #04161a;
+  --surface: #0a2126;
+  --surface-2: #102c31;
+
+  --text: #e7efe9;
+  --muted: #9db8ad;
+  --accent: #6fe8c9;
+  --brass: #d8b871;
+  --danger: #ff8a8a;
+
+  --on-accent: #04161a;
+  --on-danger: #2a0b0b;
+
+  --badge-bg: #153a34;
+  --badge-text: #8fe3c4;
+
+  /* Meets 1.4.11 against both --surface and --bg. */
+  --border: #517a83;
+  /* Purely decorative separators, which 1.4.11 does not govern. */
+  --rule: #1d3a3f;
+
+  --radius: 8px;
+  --gap: 1rem;
+  --measure: 68rem;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+
+    --bg: #eef3f1;
+    --surface: #ffffff;
+    --surface-2: #f4f8f6;
+
+    --text: #0b2620;
+    --muted: #47635a;
+    --accent: #0a6a55;
+    --brass: #7a5a1f;
+    --danger: #a52020;
+
+    --on-accent: #ffffff;
+    --on-danger: #ffffff;
+
+    --badge-bg: #d7ece5;
+    --badge-text: #0a5a49;
+
+    --border: #6b8a80;
+    --rule: #cfdcd7;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    16px/1.5 'Segoe UI',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  /* 1.4.10: the page must reflow, never scroll sideways. */
+  overflow-x: hidden;
+}
+
+/* A drifting field of stars, decorative only. */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1px 1px at 20% 30%, var(--muted), transparent),
+    radial-gradient(1px 1px at 70% 60%, var(--muted), transparent),
+    radial-gradient(1px 1px at 40% 80%, var(--muted), transparent),
+    radial-gradient(1px 1px at 85% 15%, var(--muted), transparent);
+  opacity: 0.35;
+  animation: drift 90s linear infinite;
+}
+
+@keyframes drift {
+  to {
+    transform: translateY(-40px);
+  }
+}
+
+.app {
+  max-width: var(--measure);
+  margin: 0 auto;
+  /* Vertical only, so the side gutter below is never overridden. */
+  padding-block: 1.5rem;
+  padding-inline: 1rem;
+}
+
+/* ---------- banner ---------- */
+
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.banner__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.banner__glyph {
+  color: var(--accent);
+}
+
+.stats {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.stat__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat__value {
+  margin: 0;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+/* ---------- toolbar ---------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 0;
+}
+
+/* ---------- layout ---------- */
+
+.main {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (max-width: 60rem) {
+  .main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- intake ---------- */
+
+.intake {
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.intake h2,
+.fleet__head h2 {
+  /* No bottom margin: the spacing below each heading belongs to its container,
+     which is the only thing that knows how tall the row actually is. */
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.intake h2 {
+  margin-bottom: 0.75rem;
+}
+
+/* ---------- fields ---------- */
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field__hint {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.field__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.field__input {
+  flex: 1 1 10rem;
+  min-width: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+}
+
+.field__input--fit {
+  width: 100%;
+  font-family: ui-monospace, 'Cascadia Mono', 'Consolas', monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+  white-space: pre;
+}
+
+.field__input::placeholder {
+  color: var(--muted);
+}
+
+.field__input[aria-invalid='true'] {
+  border-color: var(--danger);
+  border-width: 2px;
+}
+
+/* ---------- notices ---------- */
+
+.notice {
+  display: block;
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+}
+
+/* The parse result stands on its own between two fields and needs the
+   breathing room a field's own margin would otherwise give it. */
+output.notice {
+  margin-bottom: 1rem;
+}
+
+.notice--good {
+  color: var(--accent);
+}
+
+/* Colour is never the only carrier: a failure also states its reason in
+   words, and the field it refers to is marked aria-invalid. */
+.notice--bad {
+  color: var(--danger);
+}
+
+.notice--muted {
+  color: var(--muted);
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+.btn--danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.btn--danger:hover:not(:disabled) {
+  background: var(--danger);
+  color: var(--on-danger);
+}
+
+.btn--wide {
+  width: 100%;
+}
+
+.icon-btn {
+  padding: 0.15rem 0.45rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* A single visible focus indicator for every control, meeting 1.4.11
+   against both the page and panel backgrounds. */
+:where(a, button, input, textarea, label.btn, [tabindex]):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- fleet ---------- */
+
+.fleet__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  /* Clears the "Clear all" button, which is taller than the heading beside it. */
+  margin-bottom: 1rem;
+}
+
+.fleet__empty {
+  padding: 2rem 1rem;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-align: center;
+}
+
+.fleet__grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+}
+
+.card {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.card:hover {
+  border-color: var(--border);
+}
+
+.card__name {
+  margin: 0 1.5rem 0.25rem 0;
+  font-size: 1.05rem;
+}
+
+/* The name is the card's only tab stop; stretching it over the card gives a
+   pointer the whole surface without adding a second stop. */
+.card__open {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.card__open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.card__hull {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.card__title {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.card__meta {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.card__scuttle {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  /* Above the stretched name so it stays clickable. */
+  z-index: 1;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.card__scuttle:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* ---------- badges ---------- */
+
+.badge {
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---------- dialogs ---------- */
+
+.modal {
+  width: min(46rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  overflow: hidden;
+}
+
+.modal::backdrop {
+  background: rgb(0 0 0 / 65%);
+}
+
+.modal__panel {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 2rem);
+}
+
+.modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.modal__title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.modal__subtitle {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.modal__body {
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.modal__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* ---------- fit sheet ---------- */
+
+.sheet {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+}
+
+.sheet__heading {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.sheet__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet__item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+}
+
+.sheet__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sheet__qty {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet__item--empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ---------- registry ---------- */
+
+.registry {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.registry__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.registry__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- utilities ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- user preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --rule: var(--border);
+    --muted: var(--text);
+  }
+}
+
+/* In forced-colours mode the system palette wins. Keep the structure that
+   carries meaning and drop the decoration that would fight it. */
+@media (forced-colors: active) {
+  .starfield {
+    display: none;
+  }
+
+  .btn,
+  .card,
+  .intake,
+  .modal,
+  .field__input {
+    border: 1px solid CanvasText;
+  }
+
+  :where(a, button, input, textarea, label.btn):focus-visible {
+    outline: 3px solid Highlight;
+  }
+}

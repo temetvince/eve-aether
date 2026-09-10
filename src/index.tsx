@@ -1,16 +1,21 @@
-import React from 'react';
-import App from './App';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import App from './App';
 
-const rootElement = document.getElementById('root');
+/**
+ * Boots the app into `#root`.
+ *
+ * The element is declared in `public/index.html`, so its absence means the
+ * page shell is broken and there is nothing useful to render.
+ */
+const container = document.querySelector('#root');
 
-if (rootElement) {
-  const root = createRoot(rootElement);
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-  );
-} else {
-  console.error('Root element not found');
+if (container === null) {
+  throw new Error('Missing #root element; cannot start.');
 }
+
+createRoot(container).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);

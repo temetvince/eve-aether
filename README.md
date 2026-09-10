@@ -1,55 +1,106 @@
-# Ship Namer (Aether Fleet)
+# Aether Fleet Ops
 
-A small React + TypeScript app for generating, managing, and deploying ship
-names into a lightweight fleet registry. Designed for quick name generation,
-registry import/export, and safe in-app confirmations.
+A small React and TypeScript app for keeping track of an EVE Online fleet. Each
+ship is a name you choose and a fitting you pasted straight out of the game.
 
-## Features
+## What it does
 
-- Random candidate name generation and deployment to an active fleet.
-- Editable suggested candidate: the random name displays as a large, editable
-  input so users can accept or tweak the suggested name before deployment.
-- Registries for ship names, hulls, and tags with: import, export, clear, and
-  restore defaults.
-- Persistence via `localStorage` keys: `aetherShipNames`, `aetherFleet`,
-  `aetherHulls`, `aetherTags`.
-- Exports are named using the `aether-<UTC-ISO>-<filename>.json` format for
-  deterministic filenames.
+Pick a name, paste a fit, commission the ship. That is the whole loop.
 
-## Tech
+- **Fits come from the game.** In the fitting window, right-click the ship and
+  choose _Copy to Clipboard_, then paste the result into the app. It is parsed
+  into low, mid and high slots, rigs, subsystems, drone and fighter bays, and
+  cargo.
+- **The fit supplies the hull.** A fit's first line names its ship, so there is
+  no hull to pick and no way for a ship's hull and its fitting to disagree.
+- **Names are a registry.** The app ships with a pool of names and suggests one
+  that is not already flying. You can add your own, remove ones you dislike, or
+  restore the defaults.
+- **Names ignore case.** Typing `apex archive` matches a registered
+  `Apex Archive`, marks that entry deployed, and keeps the registry's spelling.
+  The registry never ends up holding two spellings of one name.
+- **Your fit comes back out.** The exact text you pasted is stored and can be
+  copied back to the clipboard, so a fit always returns to the game unchanged.
+- **Everything is local.** The fleet and the registry live in `localStorage`.
+  Nothing is uploaded. Import and export move a fleet between browsers as a JSON
+  file.
 
-- React + TypeScript
-- ESLint + Prettier
-- Webpack for bundling
+## Running it
 
-## Project Structure (important files)
+```bash
+npm install
+npm start          # dev server on http://localhost:3000
+npm run build      # lint, format, docs, typecheck, then bundle to dist/
+```
 
-- `src/App.tsx` — main application wiring and state handlers (deploy,
-  registries)
-- `src/components/LaunchBay.tsx` — random candidate display (now editable) and
-  deploy button
-- `src/components/{NameRegistry,HullRegistry,TagRegistry}.tsx` — registry UIs
-  and import/export controls
-- `src/utils/fleet.ts` — helper utilities (random selection, import/export,
-  `makeAetherFilename`)
-- `src/App.css` — centralized styling and utility classes
+Individual gates, should you want one on its own:
 
-## Scripts
+| Script              | What it checks                                                              |
+| ------------------- | --------------------------------------------------------------------------- |
+| `npm run lint`      | oxlint, including type-aware rules and compiler diagnostics                 |
+| `npm run lint:fix`  | The same, applying fixes and suggestions. Run deliberately, review the diff |
+| `npm run format`    | Prettier, in place                                                          |
+| `npm run docs`      | markdownlint over every Markdown file                                       |
+| `npm run typecheck` | `tsc --noEmit` at full strictness                                           |
+| `npm run update`    | Bumps dependencies. Always run the full build afterwards                    |
 
-Use the npm scripts defined in `package.json` to run, build, update, etc.
+## How the code is arranged
 
-## Development notes
+The layers only ever point downward: components know about the domain, the
+domain knows nothing about React.
 
-- The app persists registries to `localStorage`. Import handlers validate and
-  normalize JSON before saving.
-- Exports create downloadable JSON files with deterministic timestamps using
-  `makeAetherFilename()`.
-- Webpack emits warnings about entrypoint size.
+| Path                                 | Holds                                                                 |
+| ------------------------------------ | --------------------------------------------------------------------- |
+| [`src/domain/`](src/domain/)         | Fit parsing, ship and fleet types, and the name rules. No React       |
+| [`src/state/`](src/state/)           | The fleet reducer and the `useFleet` hook that drives it              |
+| [`src/storage/`](src/storage/)       | Reading and writing `localStorage` and import/export files            |
+| [`src/components/`](src/components/) | One folder per component: the component and its props type            |
+| [`src/App.tsx`](src/App.tsx)         | The composition root: all wiring, and the questions asked of the user |
+
+Two decisions are worth knowing about before you change anything.
+
+### A stored ship keeps its fit as text
+
+Storage holds the name you gave a ship and the fit text you pasted, never the
+parsed structure. The fit is parsed again on load. That keeps `parseFit` the
+single authority on what a fit means: an improvement to the parser reaches fits
+that were saved before it, and a stored fit can never drift out of step with the
+code that reads it.
+
+### The parser does not trust blank lines
+
+The game separates a fit's sections with blank lines, and writes an empty
+section for every slot type the hull does not have. That structure does not
+survive a trip through a text editor or a chat window, so the parser does not
+depend on it. It relies on three things instead:
+
+1. Low, mid, high and rig always come first, in that order, on every hull.
+2. A stack count such as `x16` can only appear in a hold, never in a slot. The
+   first block past the rigs that carries one is where the holds begin.
+3. Anything between the rigs and that point is subsystems.
+
+Cargo is always written last, so the holds line up from there. When a paste has
+lost its structure entirely the leftover lines are read as cargo rather than
+mislabelled as modules — and either way the original text is kept verbatim.
+
+## Accessibility
+
+The app targets WCAG 2.1 Level AA, and that is treated as a build requirement
+rather than a goal. Every colour pair in
+[`src/styles/app.css`](src/styles/app.css) has been measured — 4.5:1 for text,
+3:1 for control borders and the focus ring — in both the light and dark
+editions. Dialogs are native `<dialog>` elements, so focus trapping, the Escape
+key and focus restoration come from the browser rather than from code that could
+drift. The layout reflows to a single column and holds a side gutter down to a
+320px viewport, and `prefers-reduced-motion`, `prefers-color-scheme`,
+`prefers-contrast` and `forced-colors` are all honoured.
 
 ## Contributing
 
-Open a PR with focused changes.
+[`CLAUDE.md`](CLAUDE.md) is the working agreement for this repository and
+applies to every change, whoever or whatever is making it. Open a PR with
+focused changes and a green `npm run build`.
 
 ## License
 
-Licensed under the project `LICENSE` in the repository.
+See [`LICENSE`](LICENSE).

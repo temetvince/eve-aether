@@ -1,0 +1,102 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+
+  // `style` and `restriction` are deliberately absent: they enforce taste, not
+  // correctness, and buy churn instead of protection.
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error",
+    "pedantic": "error"
+  },
+
+  "plugins": [
+    "eslint",
+    "typescript",
+    "oxc",
+    "unicorn",
+    "react",
+    "jsx-a11y",
+    "import",
+    "promise"
+  ],
+
+  "options": {
+    // Type-aware rules and compiler diagnostics, via `oxlint-tsgolint`.
+    "typeAware": true,
+    "typeCheck": true,
+    "denyWarnings": true,
+    // A suppression that no longer suppresses anything is itself a defect, so
+    // stale directives cannot accumulate silently.
+    "reportUnusedDisableDirectives": "error"
+  },
+
+  "rules": {
+    // The automatic JSX runtime is on (`jsx: react-jsx` in tsconfig, `runtime:
+    // automatic` in .babelrc), so JSX compiles to a generated import and does not
+    // need `React` in scope. oxlint has no setting for the runtime, so the rule
+    // can only be turned off.
+    "react/react-in-jsx-scope": "off",
+
+    // Props are a component's contract and must never be mutated. This rule is
+    // what makes rule 1's "deeply readonly props" a compile-time guarantee
+    // rather than a convention someone has to remember.
+    //
+    // Two carve-outs, both for types this repo does not own:
+    //   - `ignoreInferredTypes` exempts parameters whose type React supplies,
+    //     such as the event argument of a JSX handler.
+    //   - `allow` exempts types this repo does not declare and cannot change:
+    //     React's node types, and the DOM's `File`.
+    // Everything the repo does declare is still held to the rule.
+    "typescript/prefer-readonly-parameter-types": [
+      "error",
+      {
+        "ignoreInferredTypes": true,
+        "allow": [
+          { "from": "package", "package": "react", "name": "ReactNode" },
+          { "from": "package", "package": "react", "name": "ReactElement" },
+          { "from": "lib", "name": "File" }
+        ]
+      }
+    ]
+  },
+
+  "overrides": [
+    {
+      // A component's markup is one expression, so its line count measures the
+      // size of the UI it renders rather than the complexity of its logic.
+      // Splitting a component to satisfy a line budget invents indirection
+      // instead of removing any.
+      "files": ["src/**/*.tsx"],
+      "rules": { "eslint/max-lines-per-function": "off" }
+    },
+    {
+      // The reducer is one `switch` over a closed action union. Its length
+      // measures how many actions exist, not how involved any of them is, and
+      // the exhaustiveness check depends on the cases staying in one function.
+      "files": ["src/state/fleetReducer.ts"],
+      "rules": { "eslint/max-lines-per-function": "off" }
+    },
+    {
+      // The build configuration is one declarative object literal. Its length
+      // is the number of options it sets, and carving it into helper functions
+      // would scatter the config without simplifying anything.
+      "files": ["webpack.config.js"],
+      "rules": { "eslint/max-lines-per-function": "off" }
+    },
+    {
+      // The composition root imports every screen it assembles. A high import
+      // count is what makes it the composition root; the only way to lower the
+      // number is a barrel file, which hides the graph instead of shrinking it.
+      "files": ["src/App.tsx"],
+      "rules": { "import/max-dependencies": "off" }
+    }
+  ],
+
+  // The `react-perf` plugin is deliberately absent. Every rule in it forbids
+  // creating a value during render, which would force `useCallback` and
+  // `useMemo` around ordinary event handlers throughout the app. That is churn
+  // rather than protection at this size, and it cannot even be satisfied inside
+  // a list without a memoised child per row.
+  "ignorePatterns": ["dist/**", "node_modules/**", "public/**"]
+}
