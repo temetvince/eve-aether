@@ -25,7 +25,7 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
   The registry never ends up holding two spellings of one name.
 - **Your fit comes back out.** The exact text you pasted is stored and can be
   copied back to the clipboard, so a fit always returns to the game unchanged.
-- **A ship can be refitted.** Open a ship and choose _Change fit_ to paste a
+- **A ship can be refitted.** Open a ship and choose _Change Fit_ to paste a
   replacement. The ship keeps its name. The replacement must be for the same
   hull; a different hull means commissioning a new ship. The ship also keeps its
   spelling of the hull, which came from the game when it was commissioned. A

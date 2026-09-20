@@ -151,34 +151,38 @@ const App = (): JSX.Element => {
           availableCount={fleet.available.length}
         />
 
-        <Toolbar
-          onOpenRegistry={() => {
-            setRegistryNotice(null);
-            setDialog({ kind: 'registry' });
-          }}
-          onImport={(file) => {
-            void importFleet(file);
-          }}
-          onExport={() => {
-            download(exportName('fleet'), serialiseFleet(fleet.fleet));
-          }}
-          canExport={fleet.fleet.length > 0}
-        />
-
         <main className='main'>
-          <FitIntake
-            name={draftName}
-            onNameChange={setDraftName}
-            onSuggestName={() => {
-              setDraftName(fleet.suggest() ?? '');
-            }}
-            canSuggest={fleet.available.length > 0}
-            nameStatus={status}
-            fitText={draftFit}
-            onFitTextChange={setDraftFit}
-            parsed={parsed}
-            onCommission={commission}
-          />
+          {/* The toolbar shares a column with the intake so that, side by side,
+              the fleet starts level with the toolbar rather than beneath it. */}
+          <div className='main__side'>
+            <Toolbar
+              onOpenRegistry={() => {
+                setRegistryNotice(null);
+                setDialog({ kind: 'registry' });
+              }}
+              onImport={(file) => {
+                void importFleet(file);
+              }}
+              onExport={() => {
+                download(exportName('fleet'), serialiseFleet(fleet.fleet));
+              }}
+              canExport={fleet.fleet.length > 0}
+            />
+
+            <FitIntake
+              name={draftName}
+              onNameChange={setDraftName}
+              onSuggestName={() => {
+                setDraftName(fleet.suggest() ?? '');
+              }}
+              canSuggest={fleet.available.length > 0}
+              nameStatus={status}
+              fitText={draftFit}
+              onFitTextChange={setDraftFit}
+              parsed={parsed}
+              onCommission={commission}
+            />
+          </div>
 
           <FleetGrid
             ships={fleet.fleet}

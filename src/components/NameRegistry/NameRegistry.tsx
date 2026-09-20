@@ -46,17 +46,17 @@ const NameRegistry = ({
             className='btn btn--danger'
             onClick={onClear}
           >
-            Clear all
+            Clear All
           </button>
           <button
             type='button'
             className='btn'
             onClick={onRestoreDefaults}
           >
-            Restore defaults
+            Restore Defaults
           </button>
           <FileButton
-            label='Import names'
+            label='Import Names'
             accept='application/json,.json'
             onPick={onImport}
           />
@@ -66,7 +66,7 @@ const NameRegistry = ({
             onClick={onExport}
             disabled={names.length === 0}
           >
-            Export names
+            Export Names
           </button>
         </>
       }

@@ -140,7 +140,7 @@ const FitIntake = ({
         onClick={onCommission}
         disabled={!ready}
       >
-        Commission ship
+        Commission Ship
       </button>
     </section>
   );

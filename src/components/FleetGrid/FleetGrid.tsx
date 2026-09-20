@@ -26,7 +26,7 @@ const FleetGrid = ({
           className='btn btn--danger'
           onClick={onClearAll}
         >
-          Clear all
+          Clear All
         </button>
       )}
     </div>

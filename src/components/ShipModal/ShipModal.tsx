@@ -92,7 +92,7 @@ const ShipModal = ({
               onClick={saveFit}
               disabled={!canSave}
             >
-              Save fit
+              Save Fit
             </button>
           </>
         : <>
@@ -110,7 +110,7 @@ const ShipModal = ({
                 void copyFit();
               }}
             >
-              {copied ? 'Copied' : 'Copy fit'}
+              {copied ? 'Copied' : 'Copy Fit'}
             </button>
             <button
               type='button'
@@ -120,7 +120,7 @@ const ShipModal = ({
                 setRefit(ship.fit.source);
               }}
             >
-              Change fit
+              Change Fit
             </button>
           </>
       }

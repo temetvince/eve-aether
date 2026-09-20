@@ -23,11 +23,11 @@ const Toolbar = ({
       className='btn'
       onClick={onOpenRegistry}
     >
-      Name registry
+      Name Registry
     </button>
 
     <FileButton
-      label='Import fleet'
+      label='Import Fleet'
       accept='application/json,.json'
       onPick={onImport}
     />
@@ -38,7 +38,7 @@ const Toolbar = ({
       onClick={onExport}
       disabled={!canExport}
     >
-      Export fleet
+      Export Fleet
     </button>
   </nav>
 );

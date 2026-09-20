@@ -33,6 +33,8 @@
 
   --radius: 8px;
   --gap: 1rem;
+  /* The height of a button, shared with rows that must line up with one. */
+  --control: 2.5rem;
   --measure: 68rem;
 }
 
@@ -157,11 +159,19 @@ body {
 
 /* ---------- toolbar ---------- */
 
+/* No padding of its own: the space around the toolbar belongs to the column it
+   sits in, so the fleet beside it can start at exactly the same height. */
 .toolbar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 1rem 0;
+}
+
+/* The buttons share out the row between them, so the toolbar's edges line up
+   with the panel beneath it. The basis stays `auto` so that a row too narrow
+   for all three still wraps, and each wrapped row is filled in turn. */
+.toolbar > .btn {
+  flex: 1 1 auto;
 }
 
 /* ---------- layout ---------- */
@@ -169,13 +179,27 @@ body {
 .main {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  /* The side column is wide enough to keep the three toolbar buttons on one
+     row. */
+  grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
   align-items: start;
+  padding-top: 1rem;
+}
+
+/* The toolbar above the intake. Its gap equals the fleet heading's bottom
+   margin, so the intake panel and the first row of cards start level too. */
+.main__side {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: minmax(0, 1fr);
 }
 
 @media (max-width: 60rem) {
   .main {
     grid-template-columns: minmax(0, 1fr);
+    /* Stacked, the sections share the toolbar's vertical rhythm. The wider gap
+       above is for separating two columns, not two rows. */
+    gap: var(--gap);
   }
 }
 
@@ -293,6 +317,7 @@ output.notice {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+  min-height: var(--control);
   padding: 0.55rem 0.9rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -366,8 +391,17 @@ label.btn:has(input:focus-visible) {
   align-items: center;
   justify-content: space-between;
   gap: var(--gap);
-  /* Clears the "Clear all" button, which is taller than the heading beside it. */
+  /* As tall as the toolbar beside it whether or not "Clear All" is showing, so
+     the heading sits on the same line as the toolbar's labels. */
+  min-height: var(--control);
   margin-bottom: 1rem;
+}
+
+@media (max-width: 60rem) {
+  /* Stacked, nothing sits beside the heading, so it need not match a button. */
+  .fleet__head {
+    min-height: 0;
+  }
 }
 
 .fleet__empty {
