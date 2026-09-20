@@ -1,3 +1,4 @@
+import { unflownShips } from '../domain/Fleet';
 import { parseFit } from '../domain/parseFit';
 import { newShipId, type Ship } from '../domain/Ship';
 import { distinctNames } from '../domain/text';
@@ -105,8 +106,10 @@ const toStoredShip = (value: unknown): StoredShip | null => {
  * Rebuilds ships from stored entries, re-parsing each fit.
  *
  * @param values - Candidate entries.
- * @returns The ships that survived narrowing and parsing. An entry whose fit no
- * longer parses is dropped rather than shown broken.
+ * @returns The ships that survived narrowing and parsing, which always form a
+ * valid fleet. An entry whose fit no longer parses is dropped rather than shown
+ * broken. An entry repeating the name of an earlier one, ignoring case, is
+ * dropped too, because no two ships share a name.
  */
 const toFleet = (values: readonly unknown[]): readonly Ship[] => {
   const ships: Ship[] = [];
@@ -121,7 +124,7 @@ const toFleet = (values: readonly unknown[]): readonly Ship[] => {
     ships.push({ id: stored.id, name: stored.name, fit: parsed.fit });
   }
 
-  return ships;
+  return unflownShips([], ships);
 };
 
 /**

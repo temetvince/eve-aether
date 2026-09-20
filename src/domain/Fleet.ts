@@ -171,6 +171,36 @@ export const unregisteredNames = (
   );
 
 /**
+ * Picks out the ships a fleet could take on without a name clash.
+ *
+ * Use it to tell the user what a merge will add before doing it, and to do the
+ * merge itself, so the two can never disagree.
+ *
+ * @param fleet - Ships currently commissioned.
+ * @param incoming - Ships being offered, possibly repeating a name.
+ * @returns The incoming ships, in their original order, whose names no ship in
+ * `fleet` bears, ignoring case. When several incoming ships share a name, only
+ * the first is kept. The ships themselves are returned unchanged.
+ */
+export const unflownShips = (
+  fleet: readonly Ship[],
+  incoming: readonly Ship[],
+): readonly Ship[] => {
+  const taken = new Set(fleet.map((ship) => foldName(ship.name)));
+  const accepted: Ship[] = [];
+
+  for (const ship of incoming) {
+    const folded = foldName(ship.name);
+    if (taken.has(folded)) continue;
+
+    taken.add(folded);
+    accepted.push(ship);
+  }
+
+  return accepted;
+};
+
+/**
  * Orders a fleet for display.
  *
  * @param fleet - Ships to order.

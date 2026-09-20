@@ -5,6 +5,7 @@ import {
   isDeployed,
   registerName,
   sortFleet,
+  unflownShips,
 } from '../domain/Fleet';
 import { distinctNames, sameName } from '../domain/text';
 import { DEFAULT_NAMES } from '../data/names';
@@ -47,8 +48,20 @@ export type FleetAction =
   | { readonly type: 'refit'; readonly id: string; readonly fit: Fit }
   /** Removes every ship, leaving the registry intact. */
   | { readonly type: 'clearFleet' }
-  /** Replaces the fleet, folding the incoming names into the registry. */
+  /**
+   * Replaces the fleet, folding the incoming names into the registry.
+   *
+   * Ignored when `ships` holds no ship that can be taken on, so a fleet is
+   * never replaced by nothing. Use `clearFleet` to empty it.
+   */
   | { readonly type: 'replaceFleet'; readonly ships: readonly Ship[] }
+  /**
+   * Adds ships to the fleet, folding their names into the registry.
+   *
+   * Nothing is removed. A ship whose name is already flying is left out, as
+   * {@link unflownShips} describes. Call that first to learn which ones.
+   */
+  | { readonly type: 'mergeFleet'; readonly ships: readonly Ship[] }
   /** Adds one name to the registry. */
   | { readonly type: 'addName'; readonly name: string }
   /**
@@ -132,6 +145,50 @@ const rename = (state: FleetState, id: string, name: string): FleetState => {
 };
 
 /**
+ * Takes on ships that came from outside this state, such as from a file.
+ *
+ * @param state - Current state.
+ * @param ships - Ships being offered, in any state of repair.
+ * @param keeping - Ships of the current fleet that stay. Pass the fleet to
+ * merge, or nothing to replace it.
+ * @returns The new state, or `state` unchanged when no offered ship can be
+ * taken on. A ship is left out when its name is already borne by a kept ship or
+ * by an earlier offered one, so no two ships ever share a name. Each ship taken
+ * on is spelled the way the registry spells its name, and is given a fresh id
+ * if the one it arrived with is already in use. Offered names join the
+ * registry, so an imported ship reads as deployed rather than as an unknown
+ * name.
+ */
+const adoptShips = (
+  state: FleetState,
+  ships: readonly Ship[],
+  keeping: readonly Ship[],
+): FleetState => {
+  const ids = new Set(keeping.map((ship) => ship.id));
+
+  const adopted = unflownShips(keeping, ships).map((ship): Ship => {
+    const id = ids.has(ship.id) ? newShipId() : ship.id;
+    ids.add(id);
+
+    return {
+      id,
+      name: canonicalName(state.registry, ship.name),
+      fit: ship.fit,
+    };
+  });
+
+  if (adopted.length === 0) return state;
+
+  return {
+    fleet: sortFleet([...keeping, ...adopted]),
+    registry: distinctNames([
+      ...state.registry,
+      ...adopted.map((ship) => ship.name),
+    ]),
+  };
+};
+
+/**
  * Applies one action.
  *
  * Pure, and total over {@link FleetAction}: adding a variant without handling
@@ -172,15 +229,10 @@ export const fleetReducer = (
       return { ...state, fleet: [] };
     }
     case 'replaceFleet': {
-      return {
-        fleet: sortFleet(action.ships),
-        // Names arriving with the ships join the registry, so an imported ship
-        // reads as deployed rather than as an unknown name.
-        registry: distinctNames([
-          ...state.registry,
-          ...action.ships.map((ship) => ship.name),
-        ]),
-      };
+      return adoptShips(state, action.ships, []);
+    }
+    case 'mergeFleet': {
+      return adoptShips(state, action.ships, state.fleet);
     }
     case 'addName': {
       return { ...state, registry: registerName(state.registry, action.name) };

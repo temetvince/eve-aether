@@ -5,6 +5,9 @@ import type { FleetGridProps } from './FleetGridProps';
 /**
  * The commissioned fleet.
  *
+ * The heading row and each ship are direct children of the section, with no
+ * wrapper of their own, so a stylesheet can place them individually.
+ *
  * @param props - See {@link FleetGridProps}.
  * @returns The fleet section, or an explanatory placeholder when empty.
  */
@@ -33,18 +36,16 @@ const FleetGrid = ({
 
     {ships.length === 0 ?
       <p className='fleet__empty'>
-        No ships commissioned. Paste a fit above to add one.
+        No ships commissioned. Paste a fit to add one.
       </p>
-    : <div className='fleet__grid'>
-        {ships.map((ship) => (
-          <ShipCard
-            key={ship.id}
-            ship={ship}
-            onOpen={onOpen}
-            onDecommission={onDecommission}
-          />
-        ))}
-      </div>
+    : ships.map((ship) => (
+        <ShipCard
+          key={ship.id}
+          ship={ship}
+          onOpen={onOpen}
+          onDecommission={onDecommission}
+        />
+      ))
     }
   </section>
 );

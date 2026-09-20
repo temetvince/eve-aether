@@ -56,7 +56,7 @@ const FitIntake = ({
     >
       <h2 id='intake-heading'>Commission a ship</h2>
 
-      <div className='field'>
+      <div className='field field--grow'>
         <label
           className='field__label'
           htmlFor='fit-text'

@@ -12,20 +12,30 @@ import FleetGrid from './components/FleetGrid/FleetGrid';
 import ShipModal from './components/ShipModal/ShipModal';
 import NameRegistry from './components/NameRegistry/NameRegistry';
 import type { RegistryNotice } from './components/NameRegistry/NameRegistryProps';
+import FleetImport from './components/FleetImport/FleetImport';
 
 import { parseFit } from './domain/parseFit';
 import { parseRefit } from './domain/parseRefit';
-import { isDeployed, nameStatus, unregisteredNames } from './domain/Fleet';
+import type { Ship } from './domain/Ship';
+import {
+  isDeployed,
+  nameStatus,
+  unflownShips,
+  unregisteredNames,
+} from './domain/Fleet';
 import { useFleet } from './state/useFleet';
 import { parseFleetFile, serialiseFleet } from './storage/fleetStorage';
 import { parseNamesFile, serialiseNames } from './storage/namesFile';
 import { download, exportName } from './download';
+import { readText } from './upload';
 
 /** Which dialog, if any, is open. */
 type Dialog =
   | { readonly kind: 'none' }
   | { readonly kind: 'ship'; readonly id: string }
-  | { readonly kind: 'registry' };
+  | { readonly kind: 'registry' }
+  /** Ships read from a file, waiting on the choice to merge or overwrite. */
+  | { readonly kind: 'import'; readonly ships: readonly Ship[] };
 
 /**
  * The application.
@@ -80,11 +90,9 @@ const App = (): JSX.Element => {
   };
 
   const importFleet = async (file: File): Promise<void> => {
-    let text: string;
+    const text = await readText(file);
 
-    try {
-      text = await file.text();
-    } catch {
+    if (text === null) {
       globalThis.alert('That file could not be read.');
       return;
     }
@@ -96,15 +104,25 @@ const App = (): JSX.Element => {
       return;
     }
 
-    fleet.dispatch({ type: 'replaceFleet', ships: imported });
+    if (imported.length === 0) {
+      globalThis.alert('That file holds no ships.');
+      return;
+    }
+
+    // With no fleet there is nothing to lose and nothing to merge with, so
+    // there is no question to ask.
+    if (fleet.fleet.length === 0) {
+      fleet.dispatch({ type: 'replaceFleet', ships: imported });
+      return;
+    }
+
+    setDialog({ kind: 'import', ships: imported });
   };
 
   const importNames = async (file: File): Promise<void> => {
-    let text: string;
+    const text = await readText(file);
 
-    try {
-      text = await file.text();
-    } catch {
+    if (text === null) {
       setRegistryNotice({ bad: true, text: 'That file could not be read.' });
       return;
     }
@@ -152,37 +170,36 @@ const App = (): JSX.Element => {
         />
 
         <main className='main'>
-          {/* The toolbar shares a column with the intake so that, side by side,
-              the fleet starts level with the toolbar rather than beneath it. */}
-          <div className='main__side'>
-            <Toolbar
-              onOpenRegistry={() => {
-                setRegistryNotice(null);
-                setDialog({ kind: 'registry' });
-              }}
-              onImport={(file) => {
-                void importFleet(file);
-              }}
-              onExport={() => {
-                download(exportName('fleet'), serialiseFleet(fleet.fleet));
-              }}
-              canExport={fleet.fleet.length > 0}
-            />
+          {/* Everything in here is a cell of one grid, laid out by the
+              stylesheet: the intake is a large cell and the ships flow around
+              it. */}
+          <Toolbar
+            onOpenRegistry={() => {
+              setRegistryNotice(null);
+              setDialog({ kind: 'registry' });
+            }}
+            onImport={(file) => {
+              void importFleet(file);
+            }}
+            onExport={() => {
+              download(exportName('fleet'), serialiseFleet(fleet.fleet));
+            }}
+            canExport={fleet.fleet.length > 0}
+          />
 
-            <FitIntake
-              name={draftName}
-              onNameChange={setDraftName}
-              onSuggestName={() => {
-                setDraftName(fleet.suggest() ?? '');
-              }}
-              canSuggest={fleet.available.length > 0}
-              nameStatus={status}
-              fitText={draftFit}
-              onFitTextChange={setDraftFit}
-              parsed={parsed}
-              onCommission={commission}
-            />
-          </div>
+          <FitIntake
+            name={draftName}
+            onNameChange={setDraftName}
+            onSuggestName={() => {
+              setDraftName(fleet.suggest() ?? '');
+            }}
+            canSuggest={fleet.available.length > 0}
+            nameStatus={status}
+            fitText={draftFit}
+            onFitTextChange={setDraftFit}
+            parsed={parsed}
+            onCommission={commission}
+          />
 
           <FleetGrid
             ships={fleet.fleet}
@@ -218,6 +235,25 @@ const App = (): JSX.Element => {
           }}
           onDecommission={() => {
             decommission(shown.id);
+          }}
+          onClose={() => {
+            setDialog({ kind: 'none' });
+          }}
+        />
+      )}
+
+      {dialog.kind === 'import' && (
+        <FleetImport
+          currentCount={fleet.fleet.length}
+          incomingCount={dialog.ships.length}
+          addCount={unflownShips(fleet.fleet, dialog.ships).length}
+          onMerge={() => {
+            fleet.dispatch({ type: 'mergeFleet', ships: dialog.ships });
+            setDialog({ kind: 'none' });
+          }}
+          onOverwrite={() => {
+            fleet.dispatch({ type: 'replaceFleet', ships: dialog.ships });
+            setDialog({ kind: 'none' });
           }}
           onClose={() => {
             setDialog({ kind: 'none' });

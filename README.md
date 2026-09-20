@@ -31,6 +31,12 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
   spelling of the hull, which came from the game when it was commissioned. A
   replacement whose header spells the hull differently has that one word
   corrected.
+- **Importing a fleet asks before it touches yours.** When you already have
+  ships, the app asks whether to merge or overwrite, and shows what each choice
+  will do. A merge adds the ships from the file and removes nothing. It skips
+  any ship whose name is already flying, because two ships never share a name.
+  An overwrite replaces your fleet with the one in the file. With no ships of
+  your own, the file is imported without a question.
 - **Everything is local.** The fleet and the registry live in `localStorage`.
   Nothing is uploaded. Import and export move a fleet or a name registry between
   browsers as JSON files.

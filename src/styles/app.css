@@ -159,8 +159,8 @@ body {
 
 /* ---------- toolbar ---------- */
 
-/* No padding of its own: the space around the toolbar belongs to the column it
-   sits in, so the fleet beside it can start at exactly the same height. */
+/* No padding of its own: the space around the toolbar belongs to the grid it
+   sits in, so the fleet heading beside it starts at exactly the same height. */
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -176,36 +176,88 @@ body {
 
 /* ---------- layout ---------- */
 
+/*
+ * The page is one grid of equal columns, and every ship is one cell of it.
+ *
+ *   row 1      toolbar (2 columns)   | fleet heading (the rest)
+ *   rows 2-5   intake  (2 columns)   | ships
+ *   rows 6+    ships, wrapping round beneath the intake
+ *
+ * The intake is two columns wide and four rows tall. Every row after the first
+ * is `1fr`, and with no height set on the grid that makes them all as tall as
+ * the most demanding one. The intake, shared across its four rows, is the most
+ * demanding, so four ships and the three gaps between them are exactly as tall
+ * as the intake, however tall its contents make it. Nothing here is a measured
+ * number that could drift.
+ */
 .main {
   display: grid;
-  gap: 1.5rem;
-  /* The side column is wide enough to keep the three toolbar buttons on one
-     row. */
-  grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
-  align-items: start;
+  gap: var(--gap);
+  /* Two columns and a gap hold the three toolbar buttons on one row. */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  grid-template-rows: auto;
+  grid-auto-rows: 1fr;
   padding-top: 1rem;
 }
 
-/* The toolbar above the intake. Its gap equals the fleet heading's bottom
-   margin, so the intake panel and the first row of cards start level too. */
-.main__side {
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: minmax(0, 1fr);
+.toolbar {
+  grid-column: 1 / span 2;
+  grid-row: 1;
 }
 
-@media (max-width: 60rem) {
+.intake {
+  grid-column: 1 / span 2;
+  grid-row: 2 / span 4;
+}
+
+/* The section stays in the document as the fleet's landmark but makes no box,
+   which is what lets its heading and its ships be cells of the grid above. */
+.fleet {
+  display: contents;
+}
+
+.fleet__head {
+  grid-column: 3 / -1;
+  grid-row: 1;
+}
+
+.fleet__empty {
+  grid-column: 3 / -1;
+}
+
+/* Too narrow to be sure of a third column, so nothing sits beside the intake.
+   The toolbar, the intake and the fleet heading each take the full width, and
+   the ships follow in as many columns as fit. The intake still spans four
+   rows, so a ship is the same height here as in the wider layout. The
+   breakpoint is a little above the width where a third column first fits,
+   because a scrollbar takes its width out of the grid but not out of the
+   media query. */
+@media (max-width: 44rem) {
   .main {
-    grid-template-columns: minmax(0, 1fr);
-    /* Stacked, the sections share the toolbar's vertical rhythm. The wider gap
-       above is for separating two columns, not two rows. */
-    gap: var(--gap);
+    grid-template-rows: auto repeat(4, 1fr) auto;
+  }
+
+  .toolbar,
+  .intake,
+  .fleet__head,
+  .fleet__empty {
+    grid-column: 1 / -1;
+  }
+
+  .fleet__head {
+    grid-row: 6;
   }
 }
 
 /* ---------- intake ---------- */
 
+/* A column, so that when the grid makes the panel taller than its contents the
+   fitting field takes up the difference and the panel is never left with dead
+   space at the bottom. That happens when a ship's card needs more height than a
+   quarter of the panel, which raises every row. */
 .intake {
+  display: flex;
+  flex-direction: column;
   padding: 1.25rem;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
@@ -231,6 +283,17 @@ body {
 
 .field {
   margin-bottom: 1rem;
+}
+
+/* Takes any spare height in a column container and hands it to its input. */
+.field--grow {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.field--grow > .field__input {
+  flex: 1 0 auto;
 }
 
 .field__label {
@@ -394,28 +457,26 @@ label.btn:has(input:focus-visible) {
   /* As tall as the toolbar beside it whether or not "Clear All" is showing, so
      the heading sits on the same line as the toolbar's labels. */
   min-height: var(--control);
-  margin-bottom: 1rem;
 }
 
-@media (max-width: 60rem) {
+@media (max-width: 44rem) {
   /* Stacked, nothing sits beside the heading, so it need not match a button. */
   .fleet__head {
     min-height: 0;
   }
 }
 
+/* Fills a ship's cell, with the message centred in it. */
 .fleet__empty {
-  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 1rem;
   border: 1px dashed var(--rule);
   border-radius: var(--radius);
   color: var(--muted);
   text-align: center;
-}
-
-.fleet__grid {
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
 }
 
 .card {
@@ -561,6 +622,32 @@ label.btn:has(input:focus-visible) {
   gap: 0.5rem;
   padding: 1rem;
   border-top: 1px solid var(--rule);
+}
+
+/* ---------- choices ---------- */
+
+/* A question with named answers: each answer's name, then what it will do. */
+.choice__lead {
+  margin: 0 0 1rem;
+}
+
+.choice {
+  margin: 0;
+}
+
+.choice__name {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.choice__outcome {
+  margin: 0.15rem 0 1rem;
+}
+
+.choice__outcome:last-child {
+  margin-bottom: 0;
 }
 
 /* ---------- fit sheet ---------- */
