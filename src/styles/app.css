@@ -10,26 +10,32 @@
 :root {
   color-scheme: dark;
 
-  --bg: #04161a;
-  --surface: #0a2126;
-  --surface-2: #102c31;
+  /* Neutral greys, so the two hues below are the only colour on the page. */
+  --bg: #1c1d21;
+  --surface: #25262c;
+  --surface-2: #2e3037;
 
-  --text: #e7efe9;
-  --muted: #9db8ad;
-  --accent: #6fe8c9;
-  --brass: #d8b871;
-  --danger: #ff8a8a;
+  /* Blue is for reading: every piece of text that is not one of the things
+     below. Orange is for structure and action: headings, ship names and button
+     labels, plus the focus ring. Red is kept for errors and destructive
+     buttons, so that a failure never reads as ordinary text. */
+  --text: #4fb4d8;
+  --muted: #6fa0b4;
+  --accent: #ef7c2a;
+  --danger: #f26d7f;
+  /* A ship's hull: set apart from the blue around it without being an action. */
+  --neutral: #cbcdd2;
 
-  --on-accent: #04161a;
-  --on-danger: #2a0b0b;
+  --on-accent: #1c1d21;
+  --on-danger: #1c1d21;
 
-  --badge-bg: #153a34;
-  --badge-text: #8fe3c4;
+  --badge-bg: #1f3743;
+  --badge-text: #4fb4d8;
 
-  /* Meets 1.4.11 against both --surface and --bg. */
-  --border: #517a83;
+  /* Meets 1.4.11 against --bg, --surface and --surface-2. */
+  --border: #848794;
   /* Purely decorative separators, which 1.4.11 does not govern. */
-  --rule: #1d3a3f;
+  --rule: #45474f;
 
   --radius: 8px;
   --gap: 1rem;
@@ -42,24 +48,26 @@
   :root {
     color-scheme: light;
 
-    --bg: #eef3f1;
+    --bg: #f1f2f4;
     --surface: #ffffff;
-    --surface-2: #f4f8f6;
+    --surface-2: #f6f7f9;
 
-    --text: #0b2620;
-    --muted: #47635a;
-    --accent: #0a6a55;
-    --brass: #7a5a1f;
-    --danger: #a52020;
+    /* The same blue, orange and red, darkened until they carry text on a light
+       ground. */
+    --text: #1a6e8e;
+    --muted: #34728c;
+    --accent: #a84d0b;
+    --danger: #c2203a;
+    --neutral: #1c1d21;
 
     --on-accent: #ffffff;
     --on-danger: #ffffff;
 
-    --badge-bg: #d7ece5;
-    --badge-text: #0a5a49;
+    --badge-bg: #d9ecf3;
+    --badge-text: #1a6380;
 
-    --border: #6b8a80;
-    --rule: #cfdcd7;
+    --border: #848794;
+    --rule: #d5d7dc;
   }
 }
 
@@ -131,10 +139,11 @@ body {
   font-size: 1.35rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: var(--accent);
 }
 
 .banner__glyph {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .stats {
@@ -154,7 +163,7 @@ body {
   margin: 0;
   font-size: 1.5rem;
   font-variant-numeric: tabular-nums;
-  color: var(--accent);
+  color: var(--text);
 }
 
 /* ---------- toolbar ---------- */
@@ -272,7 +281,7 @@ body {
   font-size: 1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--accent);
 }
 
 .intake h2 {
@@ -360,7 +369,7 @@ output.notice {
 }
 
 .notice--good {
-  color: var(--accent);
+  color: var(--text);
 }
 
 /* Colour is never the only carrier: a failure also states its reason in
@@ -385,7 +394,7 @@ output.notice {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface-2);
-  color: var(--text);
+  color: var(--accent);
   font: inherit;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
@@ -427,7 +436,7 @@ output.notice {
   border: 1px solid transparent;
   border-radius: var(--radius);
   background: none;
-  color: var(--muted);
+  color: var(--accent);
   font-size: 1.25rem;
   line-height: 1;
   cursor: pointer;
@@ -502,7 +511,7 @@ label.btn:has(input:focus-visible) {
   padding: 0;
   border: 0;
   background: none;
-  color: var(--text);
+  color: var(--accent);
   font: inherit;
   text-align: left;
   cursor: pointer;
@@ -517,7 +526,7 @@ label.btn:has(input:focus-visible) {
 
 .card__hull {
   margin: 0;
-  color: var(--accent);
+  color: var(--neutral);
   font-size: 0.9rem;
 }
 
@@ -543,7 +552,7 @@ label.btn:has(input:focus-visible) {
   border: 1px solid transparent;
   border-radius: var(--radius);
   background: none;
-  color: var(--muted);
+  color: var(--accent);
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
@@ -602,6 +611,7 @@ label.btn:has(input:focus-visible) {
 .modal__title {
   margin: 0;
   font-size: 1.1rem;
+  color: var(--accent);
 }
 
 .modal__subtitle {
@@ -639,7 +649,7 @@ label.btn:has(input:focus-visible) {
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--accent);
 }
 
 .choice__outcome {
@@ -676,7 +686,7 @@ label.btn:has(input:focus-visible) {
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--accent);
 }
 
 .sheet__list {
@@ -701,7 +711,7 @@ label.btn:has(input:focus-visible) {
 }
 
 .sheet__qty {
-  color: var(--accent);
+  color: var(--text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -726,10 +736,12 @@ label.btn:has(input:focus-visible) {
   border-bottom: 1px solid var(--rule);
 }
 
+/* A ship name, like the ones on the cards. */
 .registry__name {
   flex: 1 1 auto;
   min-width: 0;
   overflow-wrap: anywhere;
+  color: var(--accent);
 }
 
 /* ---------- utilities ---------- */
@@ -778,6 +790,12 @@ label.btn:has(input:focus-visible) {
   .modal,
   .field__input {
     border: 1px solid CanvasText;
+  }
+
+  /* The system already paints a disabled control in its own GrayText. Fading
+     it as well takes a colour the user chose and makes it fainter. */
+  .btn:disabled {
+    opacity: 1;
   }
 
   :where(a, button, input, textarea):focus-visible,
