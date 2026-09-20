@@ -17,7 +17,9 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
   read as `Vedmak`, and a header copied from the game is left alone.
 - **Names are a registry.** The app ships with a pool of names and suggests one
   that is not already flying. You can add your own, remove ones you dislike, or
-  restore the defaults.
+  restore the defaults. The registry dialog also exports the names as a JSON
+  array and imports one. An import merges: it adds the names you do not have and
+  removes nothing.
 - **Names ignore case.** Typing `apex archive` matches a registered
   `Apex Archive`, marks that entry deployed, and keeps the registry's spelling.
   The registry never ends up holding two spellings of one name.
@@ -30,8 +32,8 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
   replacement whose header spells the hull differently has that one word
   corrected.
 - **Everything is local.** The fleet and the registry live in `localStorage`.
-  Nothing is uploaded. Import and export move a fleet between browsers as a JSON
-  file.
+  Nothing is uploaded. Import and export move a fleet or a name registry between
+  browsers as JSON files.
 
 ## Running it
 

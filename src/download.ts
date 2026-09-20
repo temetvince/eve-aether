@@ -24,10 +24,11 @@ export const download = (filename: string, text: string): void => {
 };
 
 /**
- * Builds the filename for a fleet export.
+ * Builds the filename for an export.
  *
+ * @param kind - What the file holds; it becomes the last part of the name.
  * @returns A name carrying a UTC timestamp, so exports sort chronologically and
  * two exports never collide.
  */
-export const exportName = (): string =>
-  `aether-${new Date().toISOString().replaceAll(/[:.]/gu, '-')}-fleet.json`;
+export const exportName = (kind: 'fleet' | 'names'): string =>
+  `aether-${new Date().toISOString().replaceAll(/[:.]/gu, '-')}-${kind}.json`;

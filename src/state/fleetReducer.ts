@@ -51,6 +51,13 @@ export type FleetAction =
   | { readonly type: 'replaceFleet'; readonly ships: readonly Ship[] }
   /** Adds one name to the registry. */
   | { readonly type: 'addName'; readonly name: string }
+  /**
+   * Merges a list of names into the registry.
+   *
+   * Nothing is removed. A name already registered under a different
+   * capitalisation keeps the registry's spelling.
+   */
+  | { readonly type: 'importNames'; readonly names: readonly string[] }
   /** Removes one name. Ships already carrying it keep it. */
   | { readonly type: 'removeName'; readonly name: string }
   /** Empties the registry. */
@@ -177,6 +184,13 @@ export const fleetReducer = (
     }
     case 'addName': {
       return { ...state, registry: registerName(state.registry, action.name) };
+    }
+    case 'importNames': {
+      return {
+        ...state,
+        // Existing entries come first, so theirs is the spelling that survives.
+        registry: distinctNames([...state.registry, ...action.names]),
+      };
     }
     case 'removeName': {
       return {

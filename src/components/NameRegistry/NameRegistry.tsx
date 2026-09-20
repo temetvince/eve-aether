@@ -1,5 +1,6 @@
 import { useState, type JSX } from 'react';
 import Modal from '../Modal/Modal';
+import FileButton from '../FileButton/FileButton';
 import type { NameRegistryProps } from './NameRegistryProps';
 
 /**
@@ -17,6 +18,9 @@ const NameRegistry = ({
   isDeployed,
   onAdd,
   onRemove,
+  onImport,
+  onExport,
+  notice,
   onClear,
   onRestoreDefaults,
   onClose,
@@ -50,6 +54,19 @@ const NameRegistry = ({
             onClick={onRestoreDefaults}
           >
             Restore defaults
+          </button>
+          <FileButton
+            label='Import names'
+            accept='application/json,.json'
+            onPick={onImport}
+          />
+          <button
+            type='button'
+            className='btn'
+            onClick={onExport}
+            disabled={names.length === 0}
+          >
+            Export names
           </button>
         </>
       }
@@ -87,6 +104,13 @@ const NameRegistry = ({
           </button>
         </div>
       </form>
+
+      {/* Always present, so a screen reader hears it fill in after an import. */}
+      <output
+        className={`notice ${notice?.bad === true ? 'notice--bad' : 'notice--good'}`}
+      >
+        {notice?.text ?? ''}
+      </output>
 
       {names.length === 0 ?
         <p className='notice notice--muted'>

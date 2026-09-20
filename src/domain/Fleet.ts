@@ -153,6 +153,24 @@ export const canonicalName = (
 ): string => findRegistered(registry, name.trim()) ?? name.trim();
 
 /**
+ * Picks out the names a registry does not already hold.
+ *
+ * Use it to tell the user what an import will add before merging it in.
+ *
+ * @param registry - Registered names.
+ * @param incoming - Names being offered, in any casing, possibly repeating.
+ * @returns The distinct, trimmed incoming names that match no registry entry,
+ * ignoring case. Blank entries are dropped.
+ */
+export const unregisteredNames = (
+  registry: readonly string[],
+  incoming: readonly string[],
+): readonly string[] =>
+  distinctNames(incoming).filter(
+    (name) => findRegistered(registry, name) === null,
+  );
+
+/**
  * Orders a fleet for display.
  *
  * @param fleet - Ships to order.

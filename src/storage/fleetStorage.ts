@@ -1,6 +1,7 @@
 import { parseFit } from '../domain/parseFit';
 import { newShipId, type Ship } from '../domain/Ship';
 import { distinctNames } from '../domain/text';
+import { isRecord } from './json';
 
 /**
  * Reading and writing the fleet to the browser.
@@ -65,18 +66,6 @@ const write = (key: string, value: unknown): void => {
     // Intentionally ignored; see above.
   }
 };
-
-/**
- * Recognises any non-null object as something with readable properties.
- *
- * Every property still reads as `unknown`, so this widens what can be indexed
- * without claiming anything about what is inside.
- *
- * @param value - Candidate of unknown type.
- * @returns `true` when `value` is a non-null object.
- */
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === 'object' && value !== null;
 
 /**
  * Reads a string property, treating anything else as absent.

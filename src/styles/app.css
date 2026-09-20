@@ -352,7 +352,8 @@ output.notice {
 
 /* A single visible focus indicator for every control, meeting 1.4.11
    against both the page and panel backgrounds. */
-:where(a, button, input, textarea, label.btn, [tabindex]):focus-visible {
+:where(a, button, input, textarea, [tabindex]):focus-visible,
+label.btn:has(input:focus-visible) {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
@@ -658,7 +659,8 @@ output.notice {
     border: 1px solid CanvasText;
   }
 
-  :where(a, button, input, textarea, label.btn):focus-visible {
+  :where(a, button, input, textarea):focus-visible,
+  label.btn:has(input:focus-visible) {
     outline: 3px solid Highlight;
   }
 }
