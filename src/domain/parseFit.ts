@@ -6,6 +6,7 @@ import {
   type FitSection,
   type SlotKind,
 } from './Fit';
+import { gameSpelling } from './hullName';
 
 /**
  * Reads the EFT-style text the EVE client puts on the clipboard.
@@ -30,6 +31,9 @@ const QUANTITY = /\s+x(\d+)$/u;
 
 /** ` /OFFLINE` — a module exported in the offline state. */
 const OFFLINE = /\s*\/OFFLINE$/iu;
+
+/** Everything up to the first line break, whichever kind it is. */
+const FIRST_LINE = /^[^\r\n]*/u;
 
 /** A blank-line-delimited run of lines from the body of a fit. */
 type Block = readonly string[];
@@ -162,6 +166,54 @@ const toSection = (kind: SlotKind, block: Block): FitSection => {
   };
 };
 
+/** The two parts of a fit's header line. */
+interface Header {
+  /** Hull name exactly as the header spells it. Never blank. */
+  readonly written: string;
+  /** Fit name. May be blank, and may itself contain commas or the hull name. */
+  readonly title: string;
+}
+
+/**
+ * Reads a fit's header line.
+ *
+ * The hull is everything before the first comma, so a fit named after its hull,
+ * such as `[Vedmak, Vedmak Tackle Brawler]`, is still read correctly.
+ *
+ * @param line - First non-blank line of the paste, trimmed.
+ * @returns The header's parts, or the reason the line is not a header.
+ */
+const readHeader = (line: string): Header | string => {
+  const match = HEADER.exec(line);
+
+  if (match === null) {
+    return 'That does not start with a fit header. The first line should look like [Prospect, My Fit].';
+  }
+
+  const written = match[1]?.trim() ?? '';
+  if (written === '') return 'The fit header does not name a hull.';
+
+  return { written, title: match[2]?.trim() ?? '' };
+};
+
+/**
+ * Re-spells the hull of a fit.
+ *
+ * The header line of `source` is rewritten along with `hull`, because a stored
+ * fit is re-parsed from its text: changing `hull` alone would not survive a
+ * reload. Nothing but the hull inside the header changes, and the line ending
+ * is kept.
+ *
+ * @param fit - Fit to re-spell.
+ * @param hull - Spelling to adopt. Must name the same hull as `fit.hull`.
+ * @returns A fit whose `hull` is `hull` and whose `source` parses back to it.
+ */
+export const withHullSpelling = (fit: Fit, hull: string): Fit => ({
+  ...fit,
+  hull,
+  source: fit.source.replace(FIRST_LINE, `[${hull}, ${fit.title}]`),
+});
+
 /**
  * Parses a fitting copied from the EVE client.
  *
@@ -169,6 +221,11 @@ const toSection = (kind: SlotKind, block: Block): FitSection => {
  * fit to show the user. On success `fit.source` is the input verbatim, so the
  * fit can always be copied back into the game unchanged even if a section was
  * interpreted imperfectly.
+ *
+ * The one exception is the hull in the header line. A header that was typed by
+ * hand, such as `[vedmak, ...]`, has its hull re-spelled by {@link gameSpelling}
+ * in both `fit.hull` and `fit.source`. A header copied from the game is never
+ * touched.
  *
  * @param raw - Text pasted by the user. Any line endings; may be padded with
  * blank lines at either end.
@@ -187,22 +244,11 @@ export const parseFit = (raw: string): FitParseResult => {
     return { ok: false, reason: 'Nothing to read — paste a fit first.' };
   }
 
-  const header = HEADER.exec(lines[headerIndex] ?? '');
+  const header = readHeader(lines[headerIndex] ?? '');
+  if (typeof header === 'string') return { ok: false, reason: header };
 
-  if (header === null) {
-    return {
-      ok: false,
-      reason:
-        'That does not start with a fit header. The first line should look like [Prospect, My Fit].',
-    };
-  }
-
-  const hull = header[1]?.trim() ?? '';
-  const title = header[2]?.trim() ?? '';
-
-  if (hull === '') {
-    return { ok: false, reason: 'The fit header does not name a hull.' };
-  }
+  const { written, title } = header;
+  const hull = gameSpelling(written);
 
   const blocks = splitBlocks(lines.slice(headerIndex + 1));
   const kinds = assignKinds(blocks);
@@ -218,7 +264,12 @@ export const parseFit = (raw: string): FitParseResult => {
     };
   }
 
-  const fit: Fit = { hull, title, sections, source: raw.trim() };
+  const fit: Fit = { hull: written, title, sections, source: raw.trim() };
 
-  return { ok: true, fit };
+  // A header the game did not write is corrected in the text as well, so the
+  // fit that gets copied back names its hull the way the client expects.
+  return {
+    ok: true,
+    fit: written === hull ? fit : withHullSpelling(fit, hull),
+  };
 };

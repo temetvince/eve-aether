@@ -83,9 +83,11 @@ export interface FitSection {
 /**
  * A parsed EVE fitting.
  *
- * Invariant: `source` is the exact text the fit was parsed from, so
- * round-tripping a fit back into the game never loses information that the
- * structured view failed to model.
+ * Invariant: parsing `source` yields this fit. It is the text the player
+ * pasted, so round-tripping a fit back into the game never loses information
+ * that the structured view failed to model. The one edit ever made to it is
+ * re-spelling the hull in the header line, when the header was not written by
+ * the game.
  */
 export interface Fit {
   /** Hull name from the header line, e.g. `Prospect`. Never blank. */

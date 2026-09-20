@@ -13,6 +13,7 @@ import ShipModal from './components/ShipModal/ShipModal';
 import NameRegistry from './components/NameRegistry/NameRegistry';
 
 import { parseFit } from './domain/parseFit';
+import { parseRefit } from './domain/parseRefit';
 import { isDeployed, nameStatus } from './domain/Fleet';
 import { useFleet } from './state/useFleet';
 import { parseFleetFile, serialiseFleet } from './storage/fleetStorage';
@@ -168,6 +169,10 @@ const App = (): JSX.Element => {
             }
           }}
           renameError={renameError}
+          checkFit={(text) => parseRefit(shown.fit.hull, text)}
+          onChangeFit={(fit) => {
+            fleet.dispatch({ type: 'refit', id: shown.id, fit });
+          }}
           onDecommission={() => {
             decommission(shown.id);
           }}

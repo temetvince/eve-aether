@@ -12,7 +12,9 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
   into low, mid and high slots, rigs, subsystems, drone and fighter bays, and
   cargo.
 - **The fit supplies the hull.** A fit's first line names its ship, so there is
-  no hull to pick and no way for a ship's hull and its fitting to disagree.
+  no hull to pick and no way for a ship's hull and its fitting to disagree. The
+  hull is spelled the way the game spells it: a hand-typed `[vedmak, ...]` is
+  read as `Vedmak`, and a header copied from the game is left alone.
 - **Names are a registry.** The app ships with a pool of names and suggests one
   that is not already flying. You can add your own, remove ones you dislike, or
   restore the defaults.
@@ -21,6 +23,12 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
   The registry never ends up holding two spellings of one name.
 - **Your fit comes back out.** The exact text you pasted is stored and can be
   copied back to the clipboard, so a fit always returns to the game unchanged.
+- **A ship can be refitted.** Open a ship and choose _Change fit_ to paste a
+  replacement. The ship keeps its name. The replacement must be for the same
+  hull; a different hull means commissioning a new ship. The ship also keeps its
+  spelling of the hull, which came from the game when it was commissioned. A
+  replacement whose header spells the hull differently has that one word
+  corrected.
 - **Everything is local.** The fleet and the registry live in `localStorage`.
   Nothing is uploaded. Import and export move a fleet between browsers as a JSON
   file.

@@ -37,6 +37,14 @@ export type FleetAction =
    * Assumes the name is free; call {@link rejectRename} first.
    */
   | { readonly type: 'rename'; readonly id: string; readonly name: string }
+  /**
+   * Swaps a ship's fitting, keeping its id and its name.
+   *
+   * Ignored when the fit is for a different hull, since a ship is its hull.
+   * Check with `parseRefit` first to get a reason worth showing. An unknown id
+   * changes nothing.
+   */
+  | { readonly type: 'refit'; readonly id: string; readonly fit: Fit }
   /** Removes every ship, leaving the registry intact. */
   | { readonly type: 'clearFleet' }
   /** Replaces the fleet, folding the incoming names into the registry. */
@@ -142,6 +150,16 @@ export const fleetReducer = (
     }
     case 'rename': {
       return rename(state, action.id, action.name);
+    }
+    case 'refit': {
+      return {
+        ...state,
+        fleet: state.fleet.map((ship) =>
+          ship.id === action.id && sameName(ship.fit.hull, action.fit.hull) ?
+            { ...ship, fit: action.fit }
+          : ship,
+        ),
+      };
     }
     case 'clearFleet': {
       return { ...state, fleet: [] };
