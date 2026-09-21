@@ -3,8 +3,8 @@ import type { FitParseResult } from '../../domain/Fit';
 /**
  * What the registry has to say about the name currently typed.
  *
- * Names match case-insensitively, so a typed name can collide with a registry
- * entry or a flying ship that is spelled differently.
+ * Stray whitespace is ignored when names are matched, so a typed name can match
+ * a registry entry or a flying ship that is spaced differently.
  */
 export type NameStatus =
   /** Nothing typed yet. */

@@ -578,9 +578,14 @@ label.btn:has(input:focus-visible) {
 
 /* ---------- dialogs ---------- */
 
+/* Heights are in `dvh`, the viewport as it is right now. On a phone `vh` is the
+   viewport with the browser's bars hidden, so a dialog sized to it runs off the
+   top and bottom of the screen whenever the bars are showing. The `vh` line
+   before each one is for browsers without `dvh`. */
 .modal {
   width: min(46rem, calc(100vw - 2rem));
   max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
   padding: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -597,6 +602,7 @@ label.btn:has(input:focus-visible) {
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
 }
 
 .modal__head {

@@ -108,8 +108,8 @@ const toStoredShip = (value: unknown): StoredShip | null => {
  * @param values - Candidate entries.
  * @returns The ships that survived narrowing and parsing, which always form a
  * valid fleet. An entry whose fit no longer parses is dropped rather than shown
- * broken. An entry repeating the name of an earlier one, ignoring case, is
- * dropped too, because no two ships share a name.
+ * broken. An entry repeating the name of an earlier one exactly, case included,
+ * is dropped too, because no two ships share a name.
  */
 const toFleet = (values: readonly unknown[]): readonly Ship[] => {
   const ships: Ship[] = [];

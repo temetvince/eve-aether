@@ -1,6 +1,6 @@
 import type { FitParseResult } from './Fit';
 import { parseFit, withHullSpelling } from './parseFit';
-import { sameName } from './text';
+import { sameHull } from './text';
 
 /**
  * Parses a replacement fit for a ship that already exists.
@@ -27,7 +27,7 @@ export const parseRefit = (
   const parsed = parseFit(raw);
   if (!parsed.ok) return parsed;
 
-  if (!sameName(parsed.fit.hull, currentHull)) {
+  if (!sameHull(parsed.fit.hull, currentHull)) {
     return {
       ok: false,
       reason: `That fit is for a ${parsed.fit.hull}, and this ship is a ${currentHull}. Commission a new ship for a different hull.`,

@@ -18,11 +18,12 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
 - **Names are a registry.** The app ships with a pool of names and suggests one
   that is not already flying. You can add your own, remove ones you dislike, or
   restore the defaults. The registry dialog also exports the names as a JSON
-  array and imports one. An import merges: it adds the names you do not have and
-  removes nothing.
-- **Names ignore case.** Typing `apex archive` matches a registered
-  `Apex Archive`, marks that entry deployed, and keeps the registry's spelling.
-  The registry never ends up holding two spellings of one name.
+  array and imports one.
+- **Case is part of a name.** `apex archive` and `Apex Archive` are two
+  different names. Both can be registered, and both can be flying at once. Only
+  stray spaces are ignored: `Apex  Archive` with a doubled space matches
+  `Apex Archive`, and the registry keeps its own spacing. Hull names are the one
+  exception and ignore case, because the game decides how a hull is spelled.
 - **Your fit comes back out.** The exact text you pasted is stored and can be
   copied back to the clipboard, so a fit always returns to the game unchanged.
 - **A ship can be refitted.** Open a ship and choose _Change Fit_ to paste a
@@ -31,12 +32,15 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
   spelling of the hull, which came from the game when it was commissioned. A
   replacement whose header spells the hull differently has that one word
   corrected.
-- **Importing a fleet asks before it touches yours.** When you already have
-  ships, the app asks whether to merge or overwrite, and shows what each choice
-  will do. A merge adds the ships from the file and removes nothing. It skips
-  any ship whose name is already flying, because two ships never share a name.
-  An overwrite replaces your fleet with the one in the file. With no ships of
-  your own, the file is imported without a question.
+- **An import asks before it touches what you have.** This goes for a fleet file
+  and for a name file alike. When you already have ships, or names, the app asks
+  whether to merge or overwrite, and shows what each choice will do. With
+  nothing of your own to lose, the file is imported without a question.
+  - **Merge** adds what the file holds and removes nothing. For a fleet, it
+    skips any ship named the same as one you already have, because two ships
+    never share a name. For names, it skips the ones already registered.
+  - **Overwrite** replaces your fleet, or your registry, with the one in the
+    file. Replacing the registry does not rename any ship.
 - **Everything is local.** The fleet and the registry live in `localStorage`.
   Nothing is uploaded. Import and export move a fleet or a name registry between
   browsers as JSON files.
@@ -65,13 +69,14 @@ Individual gates, should you want one on its own:
 The layers only ever point downward: components know about the domain, the
 domain knows nothing about React.
 
-| Path                                 | Holds                                                                 |
-| ------------------------------------ | --------------------------------------------------------------------- |
-| [`src/domain/`](src/domain/)         | Fit parsing, ship and fleet types, and the name rules. No React       |
-| [`src/state/`](src/state/)           | The fleet reducer and the `useFleet` hook that drives it              |
-| [`src/storage/`](src/storage/)       | Reading and writing `localStorage` and import/export files            |
-| [`src/components/`](src/components/) | One folder per component: the component and its props type            |
-| [`src/App.tsx`](src/App.tsx)         | The composition root: all wiring, and the questions asked of the user |
+| Path                                 | Holds                                                                         |
+| ------------------------------------ | ----------------------------------------------------------------------------- |
+| [`src/domain/`](src/domain/)         | Fit parsing, ship and fleet types, and the name rules. No React               |
+| [`src/state/`](src/state/)           | The fleet reducer and the `useFleet` hook that drives it                      |
+| [`src/storage/`](src/storage/)       | Reading and writing `localStorage` and import/export files                    |
+| [`src/components/`](src/components/) | One folder per component: the component and its props type                    |
+| [`src/App.tsx`](src/App.tsx)         | The composition root: all wiring, and the questions asked of the user         |
+| [`src/`](src/), beside the root      | Page-level helpers: the import flow and its wording, file upload and download |
 
 Two decisions are worth knowing about before you change anything.
 

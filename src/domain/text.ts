@@ -1,11 +1,13 @@
 /**
  * Name identity for the fleet.
  *
- * Ship names, hull names and registry entries are all compared case- and
- * whitespace-insensitively. `Prospect Alpha`, `prospect alpha` and
- * ` PROSPECT ALPHA ` are the same name everywhere in the app, so every
+ * Ship names and registry entries are compared exactly, case included, but
+ * ignoring stray whitespace. `Prospect Alpha` and ` Prospect  Alpha ` are the
+ * same name everywhere in the app, while `prospect alpha` is a different one.
+ * Hull names are the exception and ignore case too, because the game decides
+ * how a hull is spelled and a hand-typed `vedmak` means `Vedmak`. Every
  * comparison in the domain layer routes through the helpers here rather than
- * calling `toLowerCase` at the point of use.
+ * deciding the rule at the point of use.
  */
 
 /**
@@ -15,11 +17,12 @@
  * the spelling the user typed is what gets stored and rendered.
  *
  * @param value - Raw name, as typed or as read from storage.
- * @returns A key equal for any two names that differ only in case or in
- * leading, trailing, or repeated internal whitespace.
+ * @returns A key equal for any two names that differ only in leading, trailing,
+ * or repeated internal whitespace. Names that differ in case get different
+ * keys.
  */
 export const foldName = (value: string): string =>
-  value.trim().replaceAll(/\s+/gu, ' ').toLowerCase();
+  value.trim().replaceAll(/\s+/gu, ' ');
 
 /**
  * Tests two names for domain identity.
@@ -32,15 +35,27 @@ export const sameName = (a: string, b: string): boolean =>
   foldName(a) === foldName(b);
 
 /**
- * Orders names for display: alphabetical, ignoring case and accents.
+ * Tests whether two hull names mean the same hull.
+ *
+ * @param a - First hull name.
+ * @param b - Second hull name.
+ * @returns `true` when they differ at most in case and stray whitespace.
+ */
+export const sameHull = (a: string, b: string): boolean =>
+  foldName(a).toLowerCase() === foldName(b).toLowerCase();
+
+/**
+ * Orders names for display: alphabetical, with upper and lower case mixed
+ * together rather than one sorted after the other.
  *
  * @param a - First name.
  * @param b - Second name.
  * @returns Negative, zero, or positive, per the `Array.prototype.sort`
- * comparator contract.
+ * comparator contract. Zero only for identical strings, so names that differ
+ * only in case still have a fixed order.
  */
 export const compareNames = (a: string, b: string): number =>
-  a.localeCompare(b, undefined, { sensitivity: 'base' });
+  a.localeCompare(b, undefined, { sensitivity: 'variant' });
 
 /**
  * Sorts names for display without mutating the input.
@@ -54,9 +69,9 @@ export const sortNames = (names: readonly string[]): readonly string[] =>
 /**
  * Collapses a list of names to its distinct members, sorted for display.
  *
- * Blank entries are dropped. Where several spellings fold to the same key the
- * first one wins, so an existing registry entry keeps its capitalisation when a
- * differently-cased duplicate is merged in.
+ * Blank entries are dropped. Where several entries fold to the same key the
+ * first one wins. Entries that differ in case are different names, and all of
+ * them are kept.
  *
  * @param names - Names to deduplicate, in priority order.
  * @returns A new array of distinct, trimmed names ordered by

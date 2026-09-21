@@ -6,9 +6,9 @@ import { compareNames, distinctNames, foldName, sameName } from './text';
  *
  * The registry is a pool of names to draw on; the fleet is what has been
  * commissioned. A registry name is *deployed* when a ship in the fleet bears
- * it, and names match case-insensitively throughout, so typing `prospect alpha`
- * takes the registry's `Prospect Alpha` out of circulation rather than sitting
- * beside it as a near-duplicate.
+ * it. Names match exactly, case included, so `prospect alpha` and
+ * `Prospect Alpha` are two names and can both be flying. Only stray whitespace
+ * is ignored.
  */
 
 /**
@@ -16,7 +16,8 @@ import { compareNames, distinctNames, foldName, sameName } from './text';
  *
  * @param fleet - Ships currently commissioned.
  * @param name - Name to test.
- * @returns `true` when some ship bears this name, ignoring case and whitespace.
+ * @returns `true` when some ship bears this name, ignoring stray whitespace but
+ * not case.
  */
 export const isDeployed = (fleet: readonly Ship[], name: string): boolean =>
   fleet.some((ship) => sameName(ship.name, name));
@@ -24,8 +25,9 @@ export const isDeployed = (fleet: readonly Ship[], name: string): boolean =>
 /**
  * Finds a registry entry matching a typed name.
  *
- * Use this to recover the registry's spelling of a name the user typed in a
- * different case.
+ * Use this to recover the registry's spelling of a name the user typed with
+ * different spacing. A name typed in a different case is a different name, and
+ * is not found.
  *
  * @param registry - Registered names.
  * @param name - Name as typed.
@@ -76,8 +78,8 @@ export const suggestName = (
  *
  * A name the player typed becomes a registry entry so it can be tracked as
  * deployed and offered again once the ship is decommissioned. A name that is
- * already registered under a different capitalisation is left exactly as the
- * registry spells it, so the pool never accumulates near-duplicates.
+ * already registered is not added twice. A name that differs from a registered
+ * one in case is a new name, and is added beside it.
  *
  * @param registry - Registered names.
  * @param name - Name just given to a ship. Must not be blank.
@@ -95,9 +97,9 @@ export const registerName = (
 /**
  * What the registry and the fleet have to say about a name.
  *
- * Because names match case-insensitively, a typed name can collide with a
- * registry entry or a flying ship that is spelled differently. Each variant
- * that involves such a match carries the other spelling so it can be shown.
+ * Because stray whitespace is ignored, a typed name can match a registry entry
+ * or a flying ship that is spaced differently. Each variant that involves such
+ * a match carries the other spelling so it can be shown.
  */
 export type NameStatus =
   /** Nothing typed. */
@@ -139,8 +141,9 @@ export const nameStatus = (
 /**
  * Settles which spelling of a name to use.
  *
- * A name already in the registry keeps the registry's capitalisation, so the
- * pool never ends up holding two spellings of one name.
+ * A name already in the registry keeps the registry's spacing, so the pool
+ * never ends up holding two spacings of one name. Case is part of the name, and
+ * is left as typed.
  *
  * @param registry - Registered names.
  * @param name - Name as typed.
@@ -159,8 +162,9 @@ export const canonicalName = (
  *
  * @param registry - Registered names.
  * @param incoming - Names being offered, in any casing, possibly repeating.
- * @returns The distinct, trimmed incoming names that match no registry entry,
- * ignoring case. Blank entries are dropped.
+ * @returns The distinct, trimmed incoming names that match no registry entry.
+ * A name differing from an entry in case does not match it. Blank entries are
+ * dropped.
  */
 export const unregisteredNames = (
   registry: readonly string[],
@@ -179,7 +183,8 @@ export const unregisteredNames = (
  * @param fleet - Ships currently commissioned.
  * @param incoming - Ships being offered, possibly repeating a name.
  * @returns The incoming ships, in their original order, whose names no ship in
- * `fleet` bears, ignoring case. When several incoming ships share a name, only
+ * `fleet` bears. Case counts, so `apex` does not clash with `Apex`. When several
+ * incoming ships share a name, only
  * the first is kept. The ships themselves are returned unchanged.
  */
 export const unflownShips = (
@@ -204,7 +209,7 @@ export const unflownShips = (
  * Orders a fleet for display.
  *
  * @param fleet - Ships to order.
- * @returns A new array sorted by ship name, ignoring case.
+ * @returns A new array sorted by ship name, as `compareNames` orders names.
  */
 export const sortFleet = (fleet: readonly Ship[]): readonly Ship[] =>
   fleet.toSorted((a, b) => compareNames(a.name, b.name));

@@ -12,11 +12,10 @@ import FleetGrid from './components/FleetGrid/FleetGrid';
 import ShipModal from './components/ShipModal/ShipModal';
 import NameRegistry from './components/NameRegistry/NameRegistry';
 import type { RegistryNotice } from './components/NameRegistry/NameRegistryProps';
-import FleetImport from './components/FleetImport/FleetImport';
+import ImportChoice from './components/ImportChoice/ImportChoice';
 
 import { parseFit } from './domain/parseFit';
 import { parseRefit } from './domain/parseRefit';
-import type { Ship } from './domain/Ship';
 import {
   isDeployed,
   nameStatus,
@@ -24,18 +23,12 @@ import {
   unregisteredNames,
 } from './domain/Fleet';
 import { useFleet } from './state/useFleet';
-import { parseFleetFile, serialiseFleet } from './storage/fleetStorage';
-import { parseNamesFile, serialiseNames } from './storage/namesFile';
+import { serialiseFleet } from './storage/fleetStorage';
+import { serialiseNames } from './storage/namesFile';
 import { download, exportName } from './download';
-import { readText } from './upload';
-
-/** Which dialog, if any, is open. */
-type Dialog =
-  | { readonly kind: 'none' }
-  | { readonly kind: 'ship'; readonly id: string }
-  | { readonly kind: 'registry' }
-  /** Ships read from a file, waiting on the choice to merge or overwrite. */
-  | { readonly kind: 'import'; readonly ships: readonly Ship[] };
+import type { Dialog } from './dialog';
+import { importFlow } from './imports';
+import { fleetImportCopy, namesImportCopy } from './importCopy';
 
 /**
  * The application.
@@ -89,66 +82,15 @@ const App = (): JSX.Element => {
     setDialog({ kind: 'none' });
   };
 
-  const importFleet = async (file: File): Promise<void> => {
-    const text = await readText(file);
+  const imports = importFlow(fleet, setDialog, setRegistryNotice);
 
-    if (text === null) {
-      globalThis.alert('That file could not be read.');
-      return;
-    }
-
-    const imported = parseFleetFile(text);
-
-    if (imported === null) {
-      globalThis.alert('That file is not a fleet export.');
-      return;
-    }
-
-    if (imported.length === 0) {
-      globalThis.alert('That file holds no ships.');
-      return;
-    }
-
-    // With no fleet there is nothing to lose and nothing to merge with, so
-    // there is no question to ask.
-    if (fleet.fleet.length === 0) {
-      fleet.dispatch({ type: 'replaceFleet', ships: imported });
-      return;
-    }
-
-    setDialog({ kind: 'import', ships: imported });
-  };
-
-  const importNames = async (file: File): Promise<void> => {
-    const text = await readText(file);
-
-    if (text === null) {
-      setRegistryNotice({ bad: true, text: 'That file could not be read.' });
-      return;
-    }
-
-    const names = parseNamesFile(text);
-
-    if (names === null) {
-      setRegistryNotice({
-        bad: true,
-        text: 'That file is not a name list. It should be a JSON array of names.',
-      });
-      return;
-    }
-
-    // Counted before dispatching, while the registry is still the old one.
-    const added = unregisteredNames(fleet.registry, names).length;
-
-    fleet.dispatch({ type: 'importNames', names });
-    setRegistryNotice({
-      bad: false,
-      text:
-        added === 0 ?
-          'Nothing to add. Every name in that file is already registered.'
-        : `Added ${String(added)} ${added === 1 ? 'name' : 'names'}.`,
-    });
-  };
+  // How many of the things waiting on an import question a merge would add.
+  const adding =
+    dialog.kind === 'importFleet' ?
+      unflownShips(fleet.fleet, dialog.ships).length
+    : dialog.kind === 'importNames' ?
+      unregisteredNames(fleet.registry, dialog.names).length
+    : 0;
 
   const shown =
     dialog.kind === 'ship' ?
@@ -179,7 +121,7 @@ const App = (): JSX.Element => {
               setDialog({ kind: 'registry' });
             }}
             onImport={(file) => {
-              void importFleet(file);
+              void imports.pickFleet(file);
             }}
             onExport={() => {
               download(exportName('fleet'), serialiseFleet(fleet.fleet));
@@ -242,18 +184,15 @@ const App = (): JSX.Element => {
         />
       )}
 
-      {dialog.kind === 'import' && (
-        <FleetImport
-          currentCount={fleet.fleet.length}
-          incomingCount={dialog.ships.length}
-          addCount={unflownShips(fleet.fleet, dialog.ships).length}
+      {dialog.kind === 'importFleet' && (
+        <ImportChoice
+          {...fleetImportCopy(fleet.fleet.length, dialog.ships.length, adding)}
+          canMerge={adding > 0}
           onMerge={() => {
-            fleet.dispatch({ type: 'mergeFleet', ships: dialog.ships });
-            setDialog({ kind: 'none' });
+            imports.mergeFleet(dialog.ships);
           }}
           onOverwrite={() => {
-            fleet.dispatch({ type: 'replaceFleet', ships: dialog.ships });
-            setDialog({ kind: 'none' });
+            imports.replaceFleet(dialog.ships);
           }}
           onClose={() => {
             setDialog({ kind: 'none' });
@@ -261,7 +200,9 @@ const App = (): JSX.Element => {
         />
       )}
 
-      {dialog.kind === 'registry' && (
+      {/* The registry stays open beneath the question about a name import, so
+          answering it returns to the registry rather than to the page. */}
+      {(dialog.kind === 'registry' || dialog.kind === 'importNames') && (
         <NameRegistry
           names={fleet.registry}
           isDeployed={(name) => isDeployed(fleet.fleet, name)}
@@ -272,7 +213,7 @@ const App = (): JSX.Element => {
             fleet.dispatch({ type: 'removeName', name });
           }}
           onImport={(file) => {
-            void importNames(file);
+            void imports.pickNames(file);
           }}
           onExport={() => {
             download(exportName('names'), serialiseNames(fleet.registry));
@@ -288,6 +229,26 @@ const App = (): JSX.Element => {
           }}
           onClose={() => {
             setDialog({ kind: 'none' });
+          }}
+        />
+      )}
+
+      {dialog.kind === 'importNames' && (
+        <ImportChoice
+          {...namesImportCopy(
+            fleet.registry.length,
+            dialog.names.length,
+            adding,
+          )}
+          canMerge={adding > 0}
+          onMerge={() => {
+            imports.mergeNames(dialog.names);
+          }}
+          onOverwrite={() => {
+            imports.replaceNames(dialog.names);
+          }}
+          onClose={() => {
+            setDialog({ kind: 'registry' });
           }}
         />
       )}

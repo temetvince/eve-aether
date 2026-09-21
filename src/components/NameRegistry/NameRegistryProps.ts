@@ -18,19 +18,20 @@ export interface NameRegistryProps {
   /**
    * Reports whether a ship is currently flying under a registry name.
    *
-   * Passed as a predicate so the dialog does not need to know that names are
-   * compared case-insensitively.
+   * Passed as a predicate so the dialog does not need to know how names are
+   * compared.
    */
   readonly isDeployed: (name: string) => boolean;
-  /** Adds a name. The caller deduplicates case-insensitively. */
+  /** Adds a name. The caller ignores one that is already registered. */
   readonly onAdd: (name: string) => void;
   /** Removes a name from the registry. Ships keep the names they were given. */
   readonly onRemove: (name: string) => void;
   /**
-   * Reads names from a file the user chose and merges them in.
+   * Takes a file of names the user chose.
    *
-   * The dialog does no file handling itself; the caller reads the file and
-   * reports back through {@link NameRegistryProps.notice}.
+   * The dialog does no file handling itself. The caller reads the file, decides
+   * what becomes of the names in it, and reports back through
+   * {@link NameRegistryProps.notice}.
    */
   readonly onImport: (file: File) => void;
   /** Downloads the registry as a file. Only offered when there are names. */

@@ -7,7 +7,7 @@ import {
   sortFleet,
   unflownShips,
 } from '../domain/Fleet';
-import { distinctNames, sameName } from '../domain/text';
+import { distinctNames, sameHull, sameName } from '../domain/text';
 import { DEFAULT_NAMES } from '../data/names';
 
 /**
@@ -67,10 +67,18 @@ export type FleetAction =
   /**
    * Merges a list of names into the registry.
    *
-   * Nothing is removed. A name already registered under a different
-   * capitalisation keeps the registry's spelling.
+   * Nothing is removed, and a name already registered is not added twice. A
+   * name differing from a registered one in case is added beside it.
    */
   | { readonly type: 'importNames'; readonly names: readonly string[] }
+  /**
+   * Replaces the registry with a list of names.
+   *
+   * Blank and repeated names are dropped. Names differing in case are not
+   * repeats, and are all kept.
+   * Ships keep the names they were given, registered or not.
+   */
+  | { readonly type: 'replaceNames'; readonly names: readonly string[] }
   /** Removes one name. Ships already carrying it keep it. */
   | { readonly type: 'removeName'; readonly name: string }
   /** Empties the registry. */
@@ -219,7 +227,7 @@ export const fleetReducer = (
       return {
         ...state,
         fleet: state.fleet.map((ship) =>
-          ship.id === action.id && sameName(ship.fit.hull, action.fit.hull) ?
+          ship.id === action.id && sameHull(ship.fit.hull, action.fit.hull) ?
             { ...ship, fit: action.fit }
           : ship,
         ),
@@ -240,9 +248,12 @@ export const fleetReducer = (
     case 'importNames': {
       return {
         ...state,
-        // Existing entries come first, so theirs is the spelling that survives.
+        // Existing entries come first, so theirs is the spacing that survives.
         registry: distinctNames([...state.registry, ...action.names]),
       };
+    }
+    case 'replaceNames': {
+      return { ...state, registry: distinctNames(action.names) };
     }
     case 'removeName': {
       return {
