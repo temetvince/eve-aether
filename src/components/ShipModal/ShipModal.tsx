@@ -23,7 +23,8 @@ type Mode = 'view' | 'refit' | 'compare';
  * the footer offers only Save and Cancel, so a half-typed fit cannot be left
  * behind by some other action. While the current fit is being compared, the
  * paste field is followed by what differs, and the footer offers only Done.
- * Comparing never changes the ship.
+ * Comparing never changes the ship, so the field for renaming it is not shown
+ * in that mode. A name half-typed before comparing is kept for afterwards.
  *
  * @param props - See {@link ShipModalProps}.
  * @returns The dialog.
@@ -100,6 +101,47 @@ const ShipModal = ({
     </button>
   );
 
+  const renameField = (
+    <div className='field'>
+      <label
+        className='field__label'
+        htmlFor='rename'
+      >
+        Ship name
+      </label>
+      <div className='field__row'>
+        <input
+          id='rename'
+          className='field__input'
+          type='text'
+          autoComplete='off'
+          aria-invalid={renameError !== null}
+          aria-describedby='rename-error'
+          value={draft}
+          onChange={(event) => {
+            setDraft(event.target.value);
+          }}
+        />
+        <button
+          type='button'
+          className='btn'
+          onClick={() => {
+            onRename(draft);
+          }}
+          disabled={draft.trim() === '' || draft === ship.name}
+        >
+          Rename
+        </button>
+      </div>
+      <p
+        className='notice notice--bad'
+        id='rename-error'
+      >
+        {renameError ?? ''}
+      </p>
+    </div>
+  );
+
   return (
     <Modal
       title={ship.name}
@@ -165,44 +207,8 @@ const ShipModal = ({
 
       }
     >
-      <div className='field'>
-        <label
-          className='field__label'
-          htmlFor='rename'
-        >
-          Ship name
-        </label>
-        <div className='field__row'>
-          <input
-            id='rename'
-            className='field__input'
-            type='text'
-            autoComplete='off'
-            aria-invalid={renameError !== null}
-            aria-describedby='rename-error'
-            value={draft}
-            onChange={(event) => {
-              setDraft(event.target.value);
-            }}
-          />
-          <button
-            type='button'
-            className='btn'
-            onClick={() => {
-              onRename(draft);
-            }}
-            disabled={draft.trim() === '' || draft === ship.name}
-          >
-            Rename
-          </button>
-        </div>
-        <p
-          className='notice notice--bad'
-          id='rename-error'
-        >
-          {renameError ?? ''}
-        </p>
-      </div>
+      {/* Comparing is about the fitting alone, so the name is left out of it. */}
+      {mode !== 'compare' && renameField}
 
       {mode === 'view' && <FitSheet fit={ship.fit} />}
 
