@@ -63,6 +63,15 @@ export interface FitEntry {
 }
 
 /**
+ * Writes an entry the way the game does, without its stack count or state.
+ *
+ * @param entry - The entry's type and charge.
+ * @returns `Module, Charge`, or just `Module` when it takes no charge.
+ */
+export const entryText = (entry: Pick<FitEntry, 'name' | 'charge'>): string =>
+  entry.charge === null ? entry.name : `${entry.name}, ${entry.charge}`;
+
+/**
  * One section of a fitting, with the entries the player put in it.
  *
  * A section with no entries and no empty slots is dropped during parsing, so

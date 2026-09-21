@@ -15,7 +15,7 @@ import type { RegistryNotice } from './components/NameRegistry/NameRegistryProps
 import ImportChoice from './components/ImportChoice/ImportChoice';
 
 import { parseFit } from './domain/parseFit';
-import { parseRefit } from './domain/parseRefit';
+import { parseCurrentFit, parseRefit } from './domain/parseRefit';
 import {
   isDeployed,
   nameStatus,
@@ -172,6 +172,7 @@ const App = (): JSX.Element => {
           }}
           renameError={renameError}
           checkFit={(text) => parseRefit(shown.fit.hull, text)}
+          checkCurrentFit={(text) => parseCurrentFit(shown.fit.hull, text)}
           onChangeFit={(fit) => {
             fleet.dispatch({ type: 'refit', id: shown.id, fit });
           }}

@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState, type JSX } from 'react';
+import { compareFits } from '../../domain/compareFits';
 import Modal from '../Modal/Modal';
 import FitSheet from '../FitSheet/FitSheet';
-import RefitForm from '../RefitForm/RefitForm';
+import FitPaste from '../FitPaste/FitPaste';
+import FitDiffSheet from '../FitDiffSheet/FitDiffSheet';
 import type { ShipModalProps } from './ShipModalProps';
+
+/**
+ * What the dialog is showing: the saved fitting, the field for replacing it, or
+ * the field for comparing it with what the ship is flying now.
+ */
+type Mode = 'view' | 'refit' | 'compare';
 
 /**
  * A ship's full record: its fitting, its name, and the way out of the fleet.
@@ -10,10 +18,12 @@ import type { ShipModalProps } from './ShipModalProps';
  * The fit is offered back as the exact text it was pasted from, so it can be
  * copied straight into the game's fitting window.
  *
- * The dialog has two modes. Normally it shows the fitting; while a replacement
- * fit is being pasted, the fitting gives way to the paste field and the footer
- * offers only Save and Cancel, so a half-typed fit cannot be left behind by
- * some other action.
+ * The dialog has three modes. Normally it shows the fitting. While a
+ * replacement fit is being pasted, the fitting gives way to the paste field and
+ * the footer offers only Save and Cancel, so a half-typed fit cannot be left
+ * behind by some other action. While the current fit is being compared, the
+ * paste field is followed by what differs, and the footer offers only Done.
+ * Comparing never changes the ship.
  *
  * @param props - See {@link ShipModalProps}.
  * @returns The dialog.
@@ -23,28 +33,41 @@ const ShipModal = ({
   onRename,
   renameError,
   checkFit,
+  checkCurrentFit,
   onChangeFit,
   onDecommission,
   onClose,
 }: ShipModalProps): JSX.Element => {
   const [draft, setDraft] = useState(ship.name);
   const [copied, setCopied] = useState(false);
-  // `null` while the fitting is on show; the typed text while replacing it.
-  const [refit, setRefit] = useState<string | null>(null);
+  const [mode, setMode] = useState<Mode>('view');
+  // The text in the paste field. Meaningless in `view` mode.
+  const [pasted, setPasted] = useState('');
 
   const changeFitButton = useRef<HTMLButtonElement>(null);
-  const wasEditing = useRef(false);
-  const editing = refit !== null;
+  const compareFitButton = useRef<HTMLButtonElement>(null);
+  const lastMode = useRef<Mode>('view');
 
-  // Leaving edit mode removes the button that held focus. Hand focus back to
+  // Leaving a paste mode removes the button that held focus. Hand focus back to
   // the control that opened the mode rather than letting it fall to the page.
   useEffect(() => {
-    if (wasEditing.current && !editing) changeFitButton.current?.focus();
-    wasEditing.current = editing;
-  }, [editing]);
+    if (mode === 'view' && lastMode.current === 'refit') {
+      changeFitButton.current?.focus();
+    }
+    if (mode === 'view' && lastMode.current === 'compare') {
+      compareFitButton.current?.focus();
+    }
+    lastMode.current = mode;
+  }, [mode]);
 
-  const parsed = refit === null || refit.trim() === '' ? null : checkFit(refit);
+  const check = mode === 'compare' ? checkCurrentFit : checkFit;
+  const parsed = mode === 'view' || pasted.trim() === '' ? null : check(pasted);
   const canSave = parsed?.ok === true && parsed.fit.source !== ship.fit.source;
+
+  const open = (next: Mode, text: string): void => {
+    setPasted(text);
+    setMode(next);
+  };
 
   const copyFit = async (): Promise<void> => {
     try {
@@ -60,10 +83,22 @@ const ShipModal = ({
   const saveFit = (): void => {
     if (parsed?.ok !== true) return;
     onChangeFit(parsed.fit);
-    setRefit(null);
+    setMode('view');
     // "Copied" described the old fit.
     setCopied(false);
   };
+
+  const backToView = (label: string): JSX.Element => (
+    <button
+      type='button'
+      className='btn'
+      onClick={() => {
+        setMode('view');
+      }}
+    >
+      {label}
+    </button>
+  );
 
   return (
     <Modal
@@ -75,17 +110,9 @@ const ShipModal = ({
       }
       onClose={onClose}
       footer={
-        editing ?
+        mode === 'refit' ?
           <>
-            <button
-              type='button'
-              className='btn'
-              onClick={() => {
-                setRefit(null);
-              }}
-            >
-              Cancel
-            </button>
+            {backToView('Cancel')}
             <button
               type='button'
               className='btn btn--primary'
@@ -95,6 +122,8 @@ const ShipModal = ({
               Save Fit
             </button>
           </>
+        : mode === 'compare' ?
+          backToView('Done')
         : <>
             <button
               type='button'
@@ -115,14 +144,25 @@ const ShipModal = ({
             <button
               type='button'
               className='btn'
+              ref={compareFitButton}
+              onClick={() => {
+                open('compare', '');
+              }}
+            >
+              Compare Fit
+            </button>
+            <button
+              type='button'
+              className='btn'
               ref={changeFitButton}
               onClick={() => {
-                setRefit(ship.fit.source);
+                open('refit', ship.fit.source);
               }}
             >
               Change Fit
             </button>
           </>
+
       }
     >
       <div className='field'>
@@ -164,14 +204,36 @@ const ShipModal = ({
         </p>
       </div>
 
-      {refit === null ?
-        <FitSheet fit={ship.fit} />
-      : <RefitForm
-          text={refit}
-          onTextChange={setRefit}
+      {mode === 'view' && <FitSheet fit={ship.fit} />}
+
+      {mode === 'refit' && (
+        <FitPaste
+          label='New fitting'
+          hint='Paste the replacement over the current fit. It must be for the same hull. The ship keeps its name.'
+          rows={14}
+          text={pasted}
+          onTextChange={setPasted}
           parsed={parsed}
         />
-      }
+      )}
+
+      {mode === 'compare' && (
+        <>
+          <FitPaste
+            label='Fitting the ship has now'
+            hint='In the fitting window, right-click the ship and choose Copy to Clipboard, then paste it here. It is compared with the saved fit and is not saved.'
+            rows={8}
+            text={pasted}
+            onTextChange={setPasted}
+            parsed={parsed}
+          />
+          <FitDiffSheet
+            diff={
+              parsed?.ok === true ? compareFits(ship.fit, parsed.fit) : null
+            }
+          />
+        </>
+      )}
     </Modal>
   );
 };

@@ -1,15 +1,6 @@
 import type { JSX } from 'react';
-import { SECTION_LABEL, type FitEntry } from '../../domain/Fit';
+import { SECTION_LABEL, entryText } from '../../domain/Fit';
 import type { FitSheetProps } from './FitSheetProps';
-
-/**
- * Renders one line of a fitting.
- *
- * @param entry - The entry to describe.
- * @returns Text of the form `Module, Charge` with its stack count, if any.
- */
-const entryText = (entry: FitEntry): string =>
-  entry.charge === null ? entry.name : `${entry.name}, ${entry.charge}`;
 
 /**
  * Lays a parsed fitting out section by section.

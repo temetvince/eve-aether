@@ -32,6 +32,21 @@ Pick a name, paste a fit, commission the ship. That is the whole loop.
   spelling of the hull, which came from the game when it was commissioned. A
   replacement whose header spells the hull differently has that one word
   corrected.
+- **A ship can be checked against its saved fit.** Open a ship, choose _Compare
+  Fit_, and paste the fit the ship is flying now. The app lists what to do to
+  get back to the saved fit, section by section. Nothing is saved or changed.
+  - **Cargo, drones and fighters** are compared by total quantity per item. A
+    saved 1000 missiles against 250 now reads _Add ×750_. A stack split in two
+    still counts as one amount.
+  - **Modules** are compared within each slot type. A swapped module reads as
+    one to remove and one to fit.
+  - **Loaded charges** are compared too. The right launcher with the wrong ammo
+    reads as a charge to load, not as a module to swap.
+  - Offline state, the order of modules within a slot type, and the fit's name
+    are not compared. The pasted fit must be for the same hull.
+  - Whitespace never counts as a difference. A fit that has been through a chat
+    window or an editor can gain blank lines, lose indentation, or have its
+    spaces doubled or turned into non-breaking ones, and it still matches.
 - **An import asks before it touches what you have.** This goes for a fleet file
   and for a name file alike. When you already have ships, or names, the app asks
   whether to merge or overwrite, and shows what each choice will do. With

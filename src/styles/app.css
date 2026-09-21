@@ -23,7 +23,8 @@
   --muted: #6fa0b4;
   --accent: #ef7c2a;
   --danger: #f26d7f;
-  /* A ship's hull: set apart from the blue around it without being an action. */
+  /* Set apart from the blue around it without being an action: a ship's hull,
+     and the verb that leads a step of a fit comparison. */
   --neutral: #cbcdd2;
 
   --on-accent: #1c1d21;
@@ -724,6 +725,27 @@ label.btn:has(input:focus-visible) {
 .sheet__item--empty {
   color: var(--muted);
   font-style: italic;
+}
+
+/* ---------- fit comparison ---------- */
+
+/* What to do, ahead of what to do it to. The word carries the meaning, so
+   nothing here depends on colour. A fixed width lines the items up beneath one
+   another whichever verb leads the row. */
+.diff__verb {
+  flex: 0 0 4.25rem;
+  color: var(--neutral);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Where a charge goes, on its own line under the charge. */
+.diff__detail {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 
 /* ---------- registry ---------- */

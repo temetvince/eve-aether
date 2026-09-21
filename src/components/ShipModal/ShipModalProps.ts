@@ -23,6 +23,14 @@ export interface ShipModalProps {
    */
   readonly checkFit: (text: string) => FitParseResult;
   /**
+   * Judges pasted text as the fit this ship is flying now, to be compared with
+   * its saved fit. The dialog compares whatever is accepted and shows whatever
+   * reason comes back.
+   *
+   * Must be pure: it is called during render, on every keystroke.
+   */
+  readonly checkCurrentFit: (text: string) => FitParseResult;
+  /**
    * Replaces the ship's fitting.
    *
    * Only called with a fit that {@link ShipModalProps.checkFit} accepted, so

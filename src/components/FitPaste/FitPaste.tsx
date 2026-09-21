@@ -1,9 +1,9 @@
 import { useEffect, useRef, type JSX } from 'react';
 import type { FitParseResult } from '../../domain/Fit';
-import type { RefitFormProps } from './RefitFormProps';
+import type { FitPasteProps } from './FitPasteProps';
 
 /**
- * Words for the state of the replacement fit.
+ * Words for the state of the pasted fit.
  *
  * @param parsed - Verdict on the text, or `null` for an empty field.
  * @returns The hull and fit name when accepted, otherwise the reason it was
@@ -18,19 +18,23 @@ const statusText = (parsed: FitParseResult | null): string => {
 };
 
 /**
- * The field for pasting a replacement fit.
+ * A field for pasting a fit into a dialog, with a live verdict beneath it.
  *
  * Takes focus when it appears and selects what is in it, so a paste replaces
- * the old text outright while a small hand edit is still possible.
+ * any text already there while a small hand edit is still possible. Render at
+ * most one at a time: its element ids are fixed.
  *
- * @param props - See {@link RefitFormProps}.
+ * @param props - See {@link FitPasteProps}.
  * @returns The field and its live parse status.
  */
-const RefitForm = ({
+const FitPaste = ({
+  label,
+  hint,
+  rows,
   text,
   onTextChange,
   parsed,
-}: RefitFormProps): JSX.Element => {
+}: FitPasteProps): JSX.Element => {
   const field = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -42,24 +46,23 @@ const RefitForm = ({
     <div className='field'>
       <label
         className='field__label'
-        htmlFor='refit-text'
+        htmlFor='fit-paste'
       >
-        New fitting
+        {label}
       </label>
       <p
         className='field__hint'
-        id='refit-hint'
+        id='fit-paste-hint'
       >
-        Paste the replacement over the current fit. It must be for the same
-        hull. The ship keeps its name.
+        {hint}
       </p>
       <textarea
-        id='refit-text'
+        id='fit-paste'
         className='field__input field__input--fit'
         ref={field}
-        aria-describedby='refit-hint'
+        aria-describedby='fit-paste-hint'
         aria-invalid={parsed?.ok === false}
-        rows={14}
+        rows={rows}
         spellCheck={false}
         value={text}
         onChange={(event) => {
@@ -68,7 +71,7 @@ const RefitForm = ({
       />
       <output
         className={`notice ${parsed?.ok === false ? 'notice--bad' : 'notice--good'}`}
-        htmlFor='refit-text'
+        htmlFor='fit-paste'
       >
         {statusText(parsed)}
       </output>
@@ -76,4 +79,4 @@ const RefitForm = ({
   );
 };
 
-export default RefitForm;
+export default FitPaste;
